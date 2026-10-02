@@ -4,7 +4,8 @@ Paper 2, Figure 1 (per-subarea draft): interannual recruitment by subarea.
 Reads data/aggregated_subarea.nc (from aggregate_subarea.py, run on ECMWF)
 and draws one panel per release subarea, each showing the season-mean
 outcome composition per spawning year as stacked bars (Paper 1 F3 palette)
-with the success rate on a twin axis.
+(no success line: that is the companion figure success_subarea_<by>.png,
+where all subareas share one axis so synchrony can be read directly).
 
 "Season-mean" and "per subarea" are defined as in Paper 1 Table S1: for each
 release day the fraction of particles *released in that subarea* ending in
@@ -104,10 +105,6 @@ def main() -> None:
         ax.set_ylim(0, 100)
         ax.set_title(f"{NAMES[code]} ({code}) — {100 * share[k]:.0f}% of releases",
                      fontsize=8, loc="left")
-        ax2 = ax.twinx()
-        ax2.plot(years, season[:, k, si], color="k", lw=0.9, marker="o", ms=2)
-        ax2.set_ylim(0, max(5.0, np.nanmax(season[:, k, si]) * 1.15))
-        ax2.tick_params(labelsize=7)
         ax.tick_params(labelsize=7)
     for ax in axes[-1]:
         ax.set_xticks(years[::4])
@@ -115,14 +112,35 @@ def main() -> None:
     axes[0, 0].set_xlim(years[0] - 0.6, years[-1] + 0.6)
     fig.text(0.015, 0.5, f"Season-mean share of particles released in subarea (%)",
              rotation=90, va="center", fontsize=8)
-    fig.text(0.985, 0.5, "Season-mean recruitment success (%, black line)",
-             rotation=270, va="center", fontsize=8)
     h, l = axes[0, 0].get_legend_handles_labels()
     fig.legend(h[::-1], l[::-1], loc="lower center", ncol=4, fontsize=7,
                framealpha=1.0, bbox_to_anchor=(0.5, -0.005))
-    fig.tight_layout(rect=(0.03, 0.04, 0.97, 1))
+    fig.tight_layout(rect=(0.03, 0.04, 1, 1))
     fig.savefig(out, dpi=300, bbox_inches="tight")
     print(f"Wrote {out}")
+
+    # ---- companion figure: success rate per subarea on one axis (synchrony)
+    out2 = out.replace("timeseries_subarea", "success_subarea")
+    fig2, ax = plt.subplots(figsize=(6.5, 4.0))
+    cmap = mpl.colormaps["tab10"]
+    for n, code in enumerate(PANEL_ORDER):
+        k = subs.index(code)
+        v = season[:, k, si]
+        if np.nanmean(v) < 0.5:          # 48.3, 48.5, 48.6N: no shelf-slope success to speak of
+            continue
+        ax.plot(years, v, color=cmap(n), lw=1.1, marker="o", ms=2.5,
+                label=f"{NAMES[code]} ({code})")
+    ax.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.8)
+    ax.set_ylim(0, None)
+    ax.set_xlim(years[0] - 0.6, years[-1] + 0.6)
+    ax.set_xticks(years[::2]); ax.tick_params(axis="x", rotation=90)
+    ax.set_xlabel("Spawning year")
+    ax.set_ylabel(f"Season-mean recruitment success (% of particles released in subarea)")
+    ax.grid(axis="y", color="#b0b0b0", alpha=0.5)
+    ax.legend(fontsize=7.5, framealpha=1.0, loc="upper left")
+    fig2.tight_layout()
+    fig2.savefig(out2, dpi=300, bbox_inches="tight")
+    print(f"Wrote {out2}  (subareas with mean success < 0.5% omitted)")
 
     # ---- numbers for the meeting
     S = season[:, [subs.index(c) for c in PANEL_ORDER], si]   # (year, sub)
@@ -141,6 +159,24 @@ def main() -> None:
     print(f"{'':>6s} " + " ".join(f"{PANEL_ORDER[j]:>6s}" for j in ok))
     for a, j in enumerate(ok):
         print(f"{PANEL_ORDER[j]:>6s} " + " ".join(f"{R[a, b]:6.2f}" for b in range(len(ok))))
+
+    # Which constraint drives each subarea's interannual variability?
+    # Per subarea: interannual sd of each outcome's share, and its correlation
+    # with that subarea's success. Subareas with negligible success skipped.
+    killed = [l for l in LAYERS if l.startswith("killed_")]
+    print("\nPer-subarea interannual sd of outcome share (pts) | correlation with subarea success:")
+    print(f"{'':>6s} " + " ".join(f"{LABELS[l].split(' (')[1][:-1]:>14s}" for l in killed))
+    for code in PANEL_ORDER:
+        k = subs.index(code)
+        sv = season[:, k, si]
+        if np.nanmean(sv) < 0.5:
+            continue
+        cells = []
+        for l in killed:
+            v = season[:, k, names.index(l)]
+            r = np.corrcoef(sv, v)[0, 1] if np.nanstd(v) > 0 else np.nan
+            cells.append(f"{np.nanstd(v, ddof=1):5.1f} | {r:+.2f}")
+        print(f"{code:>6s} " + " ".join(f"{c:>14s}" for c in cells))
 
     # Contribution of each subarea to domain interannual variance:
     # domain success = sum_k share_k * S_k (shares are nearly constant).
