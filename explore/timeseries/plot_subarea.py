@@ -1,7 +1,7 @@
 """
 Paper 2, Figure 1 (per-subarea draft): interannual recruitment by subarea.
 
-Reads data/aggregated_subarea.nc (from aggregate_subarea.py, run on ECMWF)
+Slide-sized (9.32 x 3.74 in). Reads data/aggregated_subarea.nc (from aggregate_subarea.py, run on ECMWF)
 and draws one panel per release subarea, each showing the season-mean
 outcome composition per spawning year as stacked bars (Paper 1 F3 palette)
 (no success line: that is the companion figure success_subarea_<by>.png,
@@ -32,7 +32,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import xarray as xr
 
-mpl.rcParams.update({"font.family": "Arial", "font.size": 8})
+mpl.rcParams.update({"font.family": "Arial", "font.size": 10})
+SLIDE = (9.32, 3.74)   # Google Slides default content size, inches
 
 LAYERS = ["exited_domain", "killed_M1", "killed_M4", "killed_M5_no_FIV",
           "killed_M5_not_on_shelf", "killed_M6_no_advance", "success"]
@@ -42,9 +43,9 @@ LABELS = {
     "killed_M5_not_on_shelf": "Off-shelf (M5b)", "killed_M6_no_advance": "No winter ice (M6)",
     "success": "Recruitment success",
 }
-NAMES = {"88.3": "Amundsen Sea", "48.1": "Antarctic Peninsula", "48.2": "South Orkney Is.",
-         "48.3": "South Georgia", "48.4": "South Sandwich Is.", "48.5": "Weddell Sea",
-         "48.6N": "Bouvet N (>60°S)", "48.6S": "Bouvet S (<60°S)"}
+NAMES = {"88.3": "Amundsen Sea", "48.1": "Ant. Peninsula", "48.2": "South Orkney Is.",
+         "48.3": "South Georgia", "48.4": "S. Sandwich Is.", "48.5": "Weddell Sea",
+         "48.6N": "Bouvet N", "48.6S": "Bouvet S"}
 PANEL_ORDER = ["88.3", "48.1", "48.2", "48.3", "48.4", "48.5", "48.6N", "48.6S"]
 FORCING_STEP_YEAR = 2019
 
@@ -84,15 +85,19 @@ def main() -> None:
     ap.add_argument("--aggregated", default=str(here / "data" / "aggregated_subarea.nc"))
     ap.add_argument("--out", default=None)
     ap.add_argument("--by", choices=["release", "fate"], default="release")
+    ap.add_argument("--dim", default="",
+                    help="comma-separated subarea codes to grey out (slide reveal), e.g. 48.3,48.6N")
     args = ap.parse_args()
-    out = args.out or str(here / f"timeseries_subarea_{args.by}.png")
+    dim = {c.strip() for c in args.dim.split(",") if c.strip()}
+    suffix = ("_dim" + "-".join(sorted(dim))) if dim else ""
+    out = args.out or str(here / f"timeseries_subarea_{args.by}{suffix}.png")
 
     ds = xr.open_dataset(args.aggregated)
     years, subs, season, names, share = season_means(ds, f"counts_{args.by}")
     colors = layer_colors()
     si = names.index("success")
 
-    fig, axes = plt.subplots(4, 2, figsize=(6.5, 8.5), sharex=True)
+    fig, axes = plt.subplots(2, 4, figsize=SLIDE, sharex=True, sharey=True)
     for ax, code in zip(axes.ravel(), PANEL_ORDER):
         k = subs.index(code)
         bottom = np.zeros(len(years))
@@ -103,44 +108,58 @@ def main() -> None:
             bottom += v
         ax.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.8)
         ax.set_ylim(0, 100)
-        ax.set_title(f"{NAMES[code]} ({code}) — {100 * share[k]:.0f}% of releases",
-                     fontsize=8, loc="left")
-        ax.tick_params(labelsize=7)
+        ax.set_title(f"{code}  {NAMES[code]}", fontsize=9, loc="left", pad=3,
+                     color="0.6" if code in dim else "k")
+        if code in dim:
+            # Grey veil over the panel: data stays visible but recedes.
+            ax.add_patch(mpl.patches.Rectangle((0, 0), 1, 1, transform=ax.transAxes,
+                                               facecolor="white", alpha=0.85, zorder=10))
+            for sp in ax.spines.values():
+                sp.set_color("0.7")
+            ax.tick_params(colors="0.6")
+        ax.tick_params(labelsize=8)
     for ax in axes[-1]:
-        ax.set_xticks(years[::4])
-        ax.tick_params(axis="x", rotation=90)
+        ax.set_xticks(years[years % 10 == 0])
     axes[0, 0].set_xlim(years[0] - 0.6, years[-1] + 0.6)
-    fig.text(0.015, 0.5, f"Season-mean share of particles released in subarea (%)",
-             rotation=90, va="center", fontsize=8)
+    fig.supylabel("Share of particles released in subarea (%)", fontsize=9, x=0.01)
     h, l = axes[0, 0].get_legend_handles_labels()
-    fig.legend(h[::-1], l[::-1], loc="lower center", ncol=4, fontsize=7,
-               framealpha=1.0, bbox_to_anchor=(0.5, -0.005))
-    fig.tight_layout(rect=(0.03, 0.04, 1, 1))
-    fig.savefig(out, dpi=300, bbox_inches="tight")
+    fig.legend(h[::-1], l[::-1], loc="lower center", ncol=4, fontsize=8,
+               framealpha=1.0, bbox_to_anchor=(0.5, 0.0), handlelength=1.2,
+               columnspacing=1.2)
+    fig.tight_layout(rect=(0.02, 0.12, 1, 1))
+    fig.savefig(out, dpi=300)
     print(f"Wrote {out}")
+    if dim:
+        return   # reveal variants only need the composition grid
 
-    # ---- companion figure: success rate per subarea on one axis (synchrony)
+    # ---- companion figure: success rate per subarea on one axis (synchrony).
+    # Only the four subareas that carry the recruitment (90% of the domain's
+    # interannual variance): 88.3, 48.1, 48.2, 48.4. 48.6S (8%) is left out so
+    # the slide is consistent with the two-step pruning that precedes it.
+    SUCCESS_SUBAREAS = ["88.3", "48.1", "48.2", "48.4"]
     out2 = out.replace("timeseries_subarea", "success_subarea")
-    fig2, ax = plt.subplots(figsize=(6.5, 4.0))
+    fig2, ax = plt.subplots(figsize=SLIDE)
     cmap = mpl.colormaps["tab10"]
-    for n, code in enumerate(PANEL_ORDER):
+    for n, code in enumerate(SUCCESS_SUBAREAS):
         k = subs.index(code)
         v = season[:, k, si]
-        if np.nanmean(v) < 0.5:          # 48.3, 48.5, 48.6N: no shelf-slope success to speak of
-            continue
-        ax.plot(years, v, color=cmap(n), lw=1.1, marker="o", ms=2.5,
-                label=f"{NAMES[code]} ({code})")
+        ax.plot(years, v, color=cmap(n), lw=1.4, marker="o", ms=4,
+                markerfacecolor="white", markeredgecolor=cmap(n), markeredgewidth=1.2,
+                label=f"{code}  {NAMES[code]}")
     ax.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.8)
     ax.set_ylim(0, None)
     ax.set_xlim(years[0] - 0.6, years[-1] + 0.6)
-    ax.set_xticks(years[::2]); ax.tick_params(axis="x", rotation=90)
+    ax.set_xticks(years[years % 5 == 0])
     ax.set_xlabel("Spawning year")
-    ax.set_ylabel(f"Season-mean recruitment success (% of particles released in subarea)")
+    ax.set_ylabel("Season-mean recruitment success\n(% of particles released in subarea)")
     ax.grid(axis="y", color="#b0b0b0", alpha=0.5)
-    ax.legend(fontsize=7.5, framealpha=1.0, loc="upper left")
-    fig2.tight_layout()
-    fig2.savefig(out2, dpi=300, bbox_inches="tight")
-    print(f"Wrote {out2}  (subareas with mean success < 0.5% omitted)")
+    h2, l2 = ax.get_legend_handles_labels()
+    fig2.legend(h2, l2, loc="lower center", ncol=len(h2), fontsize=9,
+                framealpha=1.0, bbox_to_anchor=(0.5, 0.0), handlelength=1.5,
+                columnspacing=1.2)
+    fig2.tight_layout(rect=(0, 0.09, 1, 1))
+    fig2.savefig(out2, dpi=300)
+    print(f"Wrote {out2}  (subareas {', '.join(SUCCESS_SUBAREAS)} only)")
 
     # ---- numbers for the meeting
     S = season[:, [subs.index(c) for c in PANEL_ORDER], si]   # (year, sub)

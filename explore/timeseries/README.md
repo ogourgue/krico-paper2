@@ -1,4 +1,7 @@
-# F1_timeseries — interannual recruitment time series (Figure 1, draft)
+# explore/timeseries — interannual recruitment time series (meeting drafts)
+
+Figures are slide-sized (9.32 × 3.74 in, Google Slides content area), no
+panel labels. Paper versions will be new `F*` folders.
 
 | Script | Runs where | Input | Output |
 |---|---|---|---|

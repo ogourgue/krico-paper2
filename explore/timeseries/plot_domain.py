@@ -1,7 +1,7 @@
 """
 Paper 2, Figure 1 (domain-wide draft): interannual recruitment time series.
 
-Reads the per-(year, season_day, outcome) counts already produced for Paper 1
+Slide-sized (9.32 x 3.74 in, Google Slides content area). Reads the per-(year, season_day, outcome) counts already produced for Paper 1
 (krico-paper1/F3_outcome_composition/data/aggregated.nc, committed to that
 repo) and draws two panels sharing the year axis:
 
@@ -37,8 +37,9 @@ import xarray as xr
 
 mpl.rcParams.update({
     "font.family": "Arial",
-    "font.size": 9,
+    "font.size": 11,
 })
+SLIDE = (9.32, 3.74)   # Google Slides default content size, inches
 
 # Layer order bottom -> top, identical to Paper 1 F3.
 LAYERS = [
@@ -104,26 +105,33 @@ def main() -> None:
     succ = season[:, names.index("success")]
     colors = layer_colors()
 
-    fig, (ax_a, ax_b) = plt.subplots(2, 1, figsize=(6.5, 6.5), sharex=True,
-                                     gridspec_kw={"height_ratios": [1, 1.25]})
+    fig, (ax_a, ax_b) = plt.subplots(1, 2, figsize=SLIDE,
+                                     gridspec_kw={"width_ratios": [1, 1]})
 
     # ---- (a) success time series
-    ax_a.plot(years, succ, color="C2", marker="o", ms=3.5, lw=1.2, zorder=3)
+    ax_a.plot(years, succ, color="C2", marker="o", ms=4, lw=1.2, zorder=3,
+              markerfacecolor="white", markeredgecolor="C2", markeredgewidth=1.2)
     ax_a.axhline(succ.mean(), color="C2", ls="--", lw=0.8, alpha=0.7,
                  label=f"32-year mean ({succ.mean():.1f}%)")
     for yr, va in ((years[np.argmin(succ)], "top"), (years[np.argmax(succ)], "bottom")):
         v = succ[years == yr][0]
+        # Right-align labels near the right edge so they stay inside the axes.
+        ha = "right" if yr > years[-1] - 3 else "center"
+        dx = 4 if ha == "right" else 0
         ax_a.annotate(f"{yr}: {v:.1f}%", (yr, v), textcoords="offset points",
-                      xytext=(0, -8 if va == "top" else 6), ha="center", va=va, fontsize=8)
+                      xytext=(dx, -8 if va == "top" else 6), ha=ha, va=va, fontsize=9)
     ax_a.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.9)
-    ax_a.text(FORCING_STEP_YEAR - 0.6, 0.3, "ERA-Interim | ERA5",
-              fontsize=7, color="0.4", va="bottom", ha="center")
-    ax_a.set_ylabel("Season-mean recruitment success (%)")
-    ax_a.set_ylim(0, None)
+    x_step = FORCING_STEP_YEAR - 0.5
+    ax_a.text(x_step - 0.3, 0.2, "ERA-Interim", fontsize=8, color="0.4",
+              va="bottom", ha="right")
+    ax_a.text(x_step + 0.3, 0.2, "ERA5", fontsize=8, color="0.4",
+              va="bottom", ha="left")
+    ax_a.set_ylabel("Season-mean success (%)")
+    ax_a.set_xlabel("Spawning year")
+    ax_a.set_xticks(years[years % 5 == 0])
+    ax_a.set_ylim(0, succ.max() * 1.18)
     ax_a.grid(axis="y", color="#b0b0b0", alpha=0.5)
-    ax_a.legend(loc="upper left", framealpha=1.0, fontsize=8)
-    ax_a.text(0.01, 0.98, "(a)", transform=ax_a.transAxes, va="top", ha="left",
-              fontweight="bold")
+    ax_a.legend(loc="lower left", framealpha=1.0, fontsize=9)
 
     # ---- (b) stacked composition per year
     bottom = np.zeros_like(succ)
@@ -134,20 +142,19 @@ def main() -> None:
         bottom += vals
     ax_b.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.9)
     ax_b.set_ylim(0, 100)
-    ax_b.set_ylabel("Season-mean share of particles (%)")
+    ax_b.set_ylabel("Share of particles (%)")
     ax_b.set_xlabel("Spawning year")
-    ax_b.set_xticks(years[::2])
-    ax_b.tick_params(axis="x", rotation=90)
+    ax_b.set_xticks(years[years % 5 == 0])
     ax_b.set_xlim(years[0] - 0.6, years[-1] + 0.6)
     handles, labels = ax_b.get_legend_handles_labels()
-    ax_b.legend(handles[::-1], labels[::-1], loc="center left", bbox_to_anchor=(1.01, 0.5),
-                framealpha=1.0, fontsize=7.5)
-    ax_b.text(0.01, 0.98, "(b)", transform=ax_b.transAxes, va="top", ha="left",
-              fontweight="bold", color="white",
-              bbox=dict(facecolor="0.2", alpha=0.6, pad=1.5, edgecolor="none"))
+    # Legend below the figure, read left to right in stacking order
+    # (success first, as at the top of the stack).
+    fig.legend(handles[::-1], labels[::-1], loc="lower center", ncol=4,
+               bbox_to_anchor=(0.5, 0.0), framealpha=1.0, fontsize=9,
+               handlelength=1.2, columnspacing=1.2)
 
-    fig.tight_layout()
-    fig.savefig(args.out, dpi=300, bbox_inches="tight")
+    fig.tight_layout(rect=(0, 0.11, 1, 1))
+    fig.savefig(args.out, dpi=300)
     print(f"Wrote {args.out}")
 
     # ---- numbers for the meeting
