@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# As in krico-paper1: small aggregated data (data/*.nc) and rendered
+# figures (*.png) are committed so a figure reproduces from plot.py alone.
+**/*.pdf
+
+# SLURM logs
+**/*.out
+ecsbatch.log.*
+
+# Exploratory work that has not earned an F/FS/S prefix (see README).
+explore/**/data/
