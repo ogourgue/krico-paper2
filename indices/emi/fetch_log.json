@@ -1,0 +1,16 @@
+{
+  "data_url": "https://www.jamstec.go.jp/virtualearth/data/SINTEX/SINTEX_EMI.csv",
+  "page_url": "https://www.jamstec.go.jp/aplinfo/sintexf/e/seasonal/data_download.html",
+  "site_url": "https://www.jamstec.go.jp/virtualearth/general/en/index.html",
+  "last_checked": "2026-10-15",
+  "page_sha256": "33162e7c5f3372c503f0ac84794f763a2d8126e448e9d9f90e1dd763b45403ce",
+  "downloads": [
+    {
+      "date": "2026-10-15",
+      "data_sha256": "f363da8a58ffbcc2bd304b38fcd604444f9bf60c6b4bb4db4304729901160da9",
+      "bytes": 42282,
+      "last_month": "2026-09",
+      "note": "initial download"
+    }
+  ]
+}
