@@ -1,0 +1,17 @@
+{
+  "data_url": "https://files.bas.ac.uk/twins/asli/asli_calculation_latest.csv",
+  "page_url": "https://scotthosking.com/asl_index",
+  "code_url": "https://github.com/antarctica/asli",
+  "last_checked": "2026-10-15",
+  "page_sha256": "8691949378b5c5fa0f71dfbb03a5bdbae93c4edfd91981a4f32b65d490a81958",
+  "downloads": [
+    {
+      "date": "2026-10-15",
+      "id": "asli_3.20240813_20261010",
+      "data_sha256": "c30f16bc2fd011f0db503808eb59128a2a4f2430b00f4e8e302ecf02925488c5",
+      "bytes": 48502,
+      "last_month": "2026-07",
+      "note": "initial download"
+    }
+  ]
+}
