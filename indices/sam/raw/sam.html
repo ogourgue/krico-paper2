@@ -1,0 +1,325 @@
+<html><head>
+<title>An observation-based Southern Hemisphere Annular Mode Index</title>
+<meta name="author" content="Dr Gareth Marshall">
+<meta name="description" content="SAM data">
+<meta name="keywords" content="SAM, index, data, Southern Hemisphere Annular Mode, Antarctic Oscillation">
+</head>
+
+<a name=top>
+<img src="sam_back.gif" align=left>
+<img src="sam_back.gif" align=right>
+<h1 align="center">An observation-based Southern Hemisphere Annular Mode Index</h1>
+<script>
+function initArray() {
+	this.length = initArray.arguments.length
+        for (var i = 0; i < this.length; i++)
+        this[i+1] = initArray.arguments[i]
+ }
+var monthNames = new
+initArray("January","February","March","April","May","June","July","August","September",
+	"October","November","December");
+var dayNames = new
+initArray("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"); 
+var date = new Date(document.lastModified);
+document.write("<CENTER><i><b>Last Revised: " +
+dayNames[date.getDay()+1] +
+" " + date.getDate() + " " + monthNames[date.getMonth()+1] + ", " +
+(date.getYear()+1900) + "</b></i></center>"); 
+</script>
+
+<p style="text-align:center">
+<font color=red>
+
+*** Following the availability of CLIMAT messages for Gough Island, Feb-May 2026 SAM values have changed slightly  ***
+</font>
+</p>
+
+<script Language="JavaScript"> 
+function change0 (picture) {
+	document.theimg0.src = picture
+}
+function change1 (picture) {
+	document.theimg1.src = picture
+}
+function change2 (picture) {
+	document.theimg2.src = picture
+}
+function change3 (picture) {
+	document.theimg3.src = picture
+}
+function change4 (picture) {
+	document.theimg4.src = picture
+}
+function change5 (picture) {
+	document.theimg5.src = picture
+}
+function change6 (picture) {
+	document.theimg6.src = picture
+}
+function change7 (picture) {
+	document.theimg7.src = picture
+}
+function change8 (picture) {
+	document.theimg8.src = picture
+}
+function change9 (picture) {
+	document.theimg9.src = picture
+}
+function change10 (picture) {
+	document.theimg10.src = picture
+}
+function change11 (picture) {
+	document.theimg11.src = picture
+}
+function change12 (picture) {
+	document.theimg12.src = picture
+}
+function change13 (picture) {
+	document.theimg13.src = picture
+}
+function change14 (picture) {
+	document.theimg14.src = picture
+}
+function change15 (picture) {
+	document.theimg15.src = picture
+}
+function change16 (picture) {
+	document.theimg16.src = picture
+}
+function change17 (picture) {
+	document.theimg17.src = picture
+}
+function change18 (picture) {
+	document.theimg18.src = picture
+}
+</script>
+<p>
+</p>
+<hr>
+<b>Methodology</b>
+<p>
+The methodology is essentially the same as outlined in the paper below:
+<p>
+Marshall, G. J., 2003: Trends in the Southern Annular Mode from observations and reanalyses. <i>J. Clim.,</i> <b>16,</b> 4134-4143, doi:10.1175/1520-0442%282003%29016<4134%3ATITSAM>2.0.CO%3B2
+<p>
+<a href="http://journals.ametsoc.org/doi/pdf/10.1175/1520-0442%282003%29016<4134%3ATITSAM>2.0.CO%3B2"
+ onMouseOver="change8('gel2.gif')"
+ onMouseOut="change8('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg8"></a>
+Go here if you have access to online <i>J. Clim.</i> papers.</p>
+<p>
+However, there have been a few subtle changes. Principally, Valdivia has been replaced with Puerto Montt because the former station is no
+longer operating 24/7. I currently have data for Puerto Montt station for 1960, 11 months of 1961 and then data from April 1967. For
+missing data a value is calculated using a monthly offset, calculated as the mean for the 1971-2000 period, from the Valdivia data.
+Efforts are ongoing at the Direcci&#243;n Meteorol&#243;gica de Chile to produce accurate monthly data from paper records prior to 1970:
+much of the early Valdivia data is taken from the World Weather Records dataset, which provides values only to the nearest hPa.
+<p>
+From August 2022, Hobart Airport (WMO 94975) has been replaced by Hobart Airport West (WMO 94619), following parallel observations for ~5 years. 
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/sam_map.pdf"
+ onMouseOver="change10('gel2.gif')"
+ onMouseOut="change10('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg10"></a>
+Locations of the 12 stations used to compute zonal means at 40&deg;S and 65&deg;S</p>
+<p>
+Also, the mean values and standard deviations are calculated for the 30-year
+1971-2000 period.
+Thus I am now able to update the time-series when the 12 mean sea level pressure values are available.
+As I am dependent on other sites to obtain data from some of the extra-tropical stations there is typically a
+two week lag in producing a monthly value. 
+Note that in some cases I have at present been unable to find all the data: 
+monthly values in blue have one out of six station values missing at one or other of the two latitude bands while those in red have two.
+In these cases, except for early Puerto Montt data (see above), the missing 
+value has been calculated using multiple linear regression from the other stations at the appropriate latitude. It is hoped that 
+some of these missing data may be obtained in the future.
+</p>
+<p>
+Missing data in 2025/26 - Marion Island and Gough Island (Jan, Feb and May 2025), Ile Nouvelle Amsterdam (Mar and Apr 2025) and
+Marion Island (Feb-Sep 2026) - have been interpolated from the ECMWF Operational Analysis. The resultant SAM values are given in cyan.
+<p>
+<b>Data</b>
+<p>
+<pre>
+      JAN   FEB   MAR   APR   MAY   JUN   JUL   AUG   SEP   OCT   NOV   DEC
+
+1957 <font color=red>-0.87 -2.27</font>  <font color=blue>0.07 -1.97 -2.50 -0.87  1.00 -1.73  0.72 -3.12 -5.42 -2.63</font>
+1958  <font color=blue>0.04 -2.84 -2.52 -0.30 -2.72 -0.97 -1.65  0.97  1.90 -0.16  0.30  0.82</font>
+1959  <font color=blue>1.59 -0.19 -0.54 -1.25 -0.32 -1.12  0.18 -1.64  2.46 -0.46  3.28 -0.38</font>
+1960  <font color=blue>0.90  0.85  3.40 -0.35 -0.60 -0.17  0.31  0.43  1.41 -1.17  1.18  1.36</font>
+1961  <font color=blue>0.91</font> -4.00 -0.40 <font color=blue>-0.14  1.12 -0.40</font>  0.98  1.10 -1.21  1.64  1.52  2.32</font>
+1962  <font color=blue>2.34 -0.50 -0.66  1.65 -0.66 -3.41  0.33 -0.20 -0.15 -0.36 -2.25  1.35</font>
+1963  <font color=blue>3.26  1.41  2.03  1.41 -1.09  1.82  0.41 -5.03 -1.59  2.05  1.02 -0.04</font>
+1964 <font color=blue>-3.29 -1.00 -1.52  0.63  2.38 -4.14 -6.15 -2.26  1.61  0.34 -3.34 -1.49</font>
+1965 <font color=blue>-0.46 -7.65 -1.58 -0.49 -2.08  1.89  0.08  0.08  0.22  1.91  1.71 -1.48</font>
+1966  <font color=blue>0.59 -2.94 -2.81 -0.49 -1.66</font> <font color=red> 0.53</font> <font color=blue>-1.65  3.66  0.43  1.30 -1.81 -0.67</font>
+1967 <font color=blue>-3.42 -4.22  1.09</font> -0.11 -0.39  2.62  1.22  1.01  1.21  0.64 -2.17 -0.48
+1968 -0.07 -1.82 -0.90 -2.72 -2.23 -0.13  1.60  0.25 -0.36 -3.15 -3.36 -0.51
+1969 -4.13 -3.14 -0.96 -2.36  1.39 -0.88  1.81  2.10  0.58 -0.35  1.52 -0.41
+1970  0.76  1.27 -2.26 -1.57  0.24  0.72 -1.22  1.63 -2.02 -2.19  0.45 -0.72
+1971 -0.36  0.16  2.02 -1.24 -2.48  1.31  0.68 -0.78 -1.83 -2.23 -0.50 -1.57
+1972 -1.44 -0.36 -2.05 -2.94 -0.09  0.42 -1.24 -1.89 -0.91 -1.48  1.39 -1.38
+1973 -0.94  1.39  2.16  0.36 -1.94 -0.12  2.57  1.98 -1.15 -1.28 -0.54  2.17
+1974  1.18  1.82  2.81  0.05  0.42  0.08 -1.22 -4.02  1.84 -1.33 -2.24 -2.37
+1975 -1.68 -1.22 -1.23  0.56 -3.33 -0.35 -2.42 -0.16  1.23  0.59  0.11  0.35
+1976 -1.17  1.02 -0.10  1.56  1.75 -0.01  0.60  0.30  1.67  1.19 -2.88 -5.07
+1977 -3.22  0.04 -1.17 -1.36 -0.77 -2.09 -1.82 -0.41  2.69  0.21 -0.20 -0.95
+1978  1.50 -0.24 -0.99  0.64 -0.91  0.83 -2.13  2.94  1.19  0.68 -0.96 -0.01
+1979  0.74 -0.90  1.51 -0.49  1.54  2.52  3.14  1.39 -0.02  0.54 -1.26 -1.88
+1980  0.01 -1.75 -2.58 -1.77 -0.51  3.19 -1.68 -1.68 -2.56  0.45 -2.09 -0.10
+1981  0.84  1.76 -2.47 -3.52  0.88  0.38 -1.43 -1.99 -1.49 -0.39  2.34  2.21
+1982 -0.77  0.70  4.28  2.89 -0.70  2.40  0.01  1.00  1.56 -2.14 -2.32 -2.21
+1983 -2.44  0.89 -0.71 -0.60 -0.68  0.38  1.63  0.09 -0.72  2.05  3.79  1.52
+1984 -1.96 -1.74 -0.38 -0.23 -0.33  1.08 -0.21 -2.33 -0.16  1.06  0.34 -3.22
+1985 -2.38 -0.02 -0.08  0.95  0.38 -2.49  2.64  1.26  1.07  0.57  2.28  1.90
+1986  0.37 -4.89 -1.26 -0.57 -2.19 -0.95 -0.02  1.68  2.72 -0.38  0.50  1.31
+1987 -2.51 -2.49 -1.11 -0.17 -0.34  0.18 -0.26  1.79 -0.72  0.78  1.77  0.30
+1988  <font color=blue>0.13  0.12 -2.01</font>  2.11 <font color=blue>-2.03 -3.06  0.64 -2.00 -2.70 -6.03  1.77  1.88</font>
+1989 -0.02  1.14  0.20  0.00  3.73  2.91  0.88 -1.21 -0.23 -0.16  0.69 -0.05
+1990 -0.23  1.95  0.80 -3.34 -3.35 -0.28 -1.82  0.12  2.08 -0.06  0.29 -0.20
+1991  1.50 -1.69  1.07 -1.36  1.02  1.04 -1.56 -0.57 -2.52  1.30 -0.84 -1.23
+1992  0.17 -1.89 -1.10  0.53 -2.19 -3.13 -0.80 -0.40  1.06  0.70  1.49  0.58
+1993 -2.17  0.77 -0.10  1.80  2.10  0.40  2.82  2.69  1.14  1.21  1.48  1.38
+1994  <font color=blue>0.53  2.72</font>  1.59 -0.75 -1.50 <font color=blue>-2.33 -0.15</font>  1.53 <font color=blue>-1.22</font> -0.47 <font color=blue>-2.43  1.91</font>
+1995  <font color=blue>2.89  0.31</font> -1.12  0.74  2.64 -0.79 -4.26 -0.51  3.09 -0.69  0.17  1.93
+1996  0.55 -1.74  1.31 -0.28  1.90 -1.40  0.22 -2.46 -3.50  2.79 -2.36  0.03
+1997  2.37  0.68  1.43  0.15  1.43  0.69  1.82  0.76  0.69 -1.78 -3.17 <font color=blue>-0.89</font>
+1998  2.65  0.57 -0.05  2.89  <font color=blue>1.11</font>  1.31  2.13  2.66  0.74 -0.26  2.84  2.59
+1999  2.26  0.56 -1.39  2.44  2.51 -1.81  0.72  1.44  0.16  3.35  1.83  3.12
+2000  3.59  2.32  0.74  0.97  1.90 -0.31  0.52 -1.22 -3.20  1.21 -1.32 -2.05
+2001  1.43 -2.70 -0.57  3.49 -1.75 -0.02  <font color=blue>0.20</font> -0.15  1.46  1.36  2.54  1.16
+2002  2.22  2.80 -4.42  1.60 <font color=blue>-1.69</font> -0.43 -0.67  1.14 -2.18 -5.77  0.03  1.29
+2003 -0.52 -0.98 <font color=blue>-0.07</font>  2.21  <font color=blue>1.04 -2.52  1.20</font>  2.33 -0.99  0.12 -0.15 <font color=blue>-0.69</font>
+2004  2.56 -3.33  0.74  1.20 <font color=blue>-0.15</font>  1.69  2.52  <font color=blue>0.00</font>  1.77 -0.59 -1.18 -1.02
+2005  1.07  1.59 -0.12  3.46 -0.45 -0.41 -0.50  0.50  0.39 -0.11  0.66 -2.76
+2006  0.56 -1.85  1.66 -0.69  2.28  2.05  1.61 -2.64 -0.26  1.79  0.14  1.34
+2007  0.03  2.36 -0.77 -0.33 -1.02 -0.65 -2.67 -0.28 -1.88 -0.86  0.03  2.80
+2008  2.56  1.09  0.63 -0.81 -0.66  3.00  0.23  0.60  0.46  2.21  1.03  1.01
+2009  2.02  0.94  0.50 -0.43 -0.14  0.54 -0.13 -2.44 -0.78  1.47 -1.20  1.09
+2010 -0.40 -2.12  0.04  0.08  1.51  3.14  3.37  1.24 -0.33  3.19  3.88  0.25
+2011  0.48  0.87 -0.79  1.62  1.37  0.72 -1.52 -0.73 -1.79  0.59 -1.41  3.43
+2012  3.08 -1.53  0.48  2.18  0.47  1.46  3.18  1.34  0.09  0.83 -0.84 -0.90
+2013  0.71  2.84  2.31 -0.07  0.88  0.23  1.17 -3.25 -2.72 -1.39  1.07  0.77
+2014 -0.13  0.36  1.34  1.18 -1.62 -0.21  0.68  1.97 -1.62  1.32  0.35  2.45
+2015  1.35  4.92  0.88  2.03  0.41  2.41  <font color=blue>2.00</font>  1.86  1.91 -0.66  1.46  0.72
+2016  3.13  1.35  4.36  1.06 -0.92  3.66  0.81 -1.28  2.46 -0.89 -3.12 -1.52
+2017 -1.12 -1.09 -1.56  1.65  1.82  1.98  0.16  0.31  0.42 -0.64  3.18  1.44
+2018  2.72  1.02 -0.03 <font color=blue>-1.66  0.01 -1.57</font>  0.55 -0.78  1.83 <font color=blue> 2.76</font>  2.84  1.44
+2019  2.79 -1.87  1.47  0.86 -0.11  2.21 -2.20 -2.04  0.81 -1.97 -4.42 -1.78
+2020  0.57 -0.36  2.05 -1.72  1.03  1.18 -0.97 -2.20 -0.25  1.79  1.14  2.28
+2021  <font color=blue>1.95</font>  2.19 -0.95  0.87  0.75  1.88 -1.06  0.73  1.68  0.80  2.69  2.74
+2022  2.19  1.92  1.28  2.49  0.25 -2.34  1.24  0.66  2.25  1.71  3.71  2.94
+2023  4.56  0.45  0.15 -0.78  1.80 -1.18 -0.46  1.44 -1.22  1.68  0.52  2.28
+2024  2.84  2.74  1.05 <font color=blue> 1.48  1.70</font>  1.47  0.56 -4.44  0.66 -0.73  3.37 -1.54
+2025  <font color=cyan>1.40  0.31  3.39  2.68  0.89</font>  0.13  1.16  1.52 -1.11 -2.98 -2.56 -0.64
+2026  2.26 <font color=cyan> 1.90  0.96  0.31  1.96  5.93  1.84  1.59  1.88</font>
+</pre>
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.1957.2007.txt"
+ onMouseOver="change7('gel2.gif')"
+ onMouseOut="change7('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg7"></a>
+Access monthly SAM data in ASCII format
+<p>
+And due to popular demand ...
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/l40.1957.2007.txt"
+ onMouseOver="change13('gel2.gif')"
+ onMouseOut="change13('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg13"></a>
+Access monthly mean zonal MSLP data at 40&deg;S in ASCII format
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/l65.1957.2007.txt"
+ onMouseOver="change14('gel2.gif')"
+ onMouseOut="change14('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg14"></a>
+Access monthly mean zonal MSLP data at 65&deg;S in ASCII format
+<p>
+<b>Annual and seasonal data</b>
+<p>
+These have been calculated using the mean zonal mean sea level pressure for the year
+or season to derive the SAM rather than simply the mean of the monthly SAM values.
+Note that for summer (DJF) the year refers to the December.
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.1957.2007.seas.txt"
+ onMouseOver="change11('gel2.gif')"
+ onMouseOut="change11('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg11"></a>
+Access annual and seasonal SAM data in ASCII format
+<p>
+<b>Figures</b>
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.mon.pdf"
+ onMouseOver="change6('gel2.gif')"
+ onMouseOut="change6('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg6"></a>
+Month by month: the red line is a 12-month running mean.
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.seas_ann.pdf"
+ onMouseOver="change12('gel2.gif')"
+ onMouseOut="change12('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg12"></a>
+Annual and seasonal data: the thick line is the annual data.
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.ipcc.pdf"
+ onMouseOver="change9('gel2.gif')"
+ onMouseOut="change9('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg9"></a>
+Updated version of Figure 3.32 in the IPCC AR4 <i>Climate Change 2007: The Physical Science Basis</i>. 
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.ann.pdf"
+ onMouseOver="change1('gel2.gif')"
+ onMouseOut="change1('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg1"></a>
+Calendar year
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.aut.pdf"
+ onMouseOver="change2('gel2.gif')"
+ onMouseOut="change2('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg2"></a>
+Autumn (MAM)  
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.win.pdf"
+ onMouseOver="change3('gel2.gif')"
+ onMouseOut="change3('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg3"></a>
+Winter (JJA)  
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.spr.pdf"
+ onMouseOver="change4('gel2.gif')"
+ onMouseOut="change4('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg4"></a>
+Spring (SON)  
+<p>
+<a href="http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.sum.pdf"
+ onMouseOver="change5('gel2.gif')"
+ onMouseOut="change5('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg5"></a>
+Summer (DJF)</p>
+<p>
+<b>Links</b>
+<p>
+<a href="https://climatedataguide.ucar.edu/climate-data/marshall-southern-annular-mode-sam-index-station-based"
+ onMouseOver="change17('gel2.gif')"
+ onMouseOut="change17('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg17"></a>
+Dataset page at the National Center for Atmospheric Research (NCAR) Climate Data Guide
+</p>
+<p>
+<a href="https://www.youtube.com/watch?v=ettDV8_UL1Q"
+ onMouseOver="change16('gel2.gif')"
+ onMouseOut="change16('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg16"></a>
+A fun way of explaining the impact of the SAM on the climate of Victoria, Australia (thanks to Dale Grey)
+</p>
+<p>
+<a href="https://tcoutlook.com"
+ onMouseOver="change18('gel2.gif')"
+ onMouseOut="change18('gel1.gif')">
+<img border=0 align=top src="gel1.gif" lowSRC="gel2.gif" NAME="theimg18"></a>
+Tropical Cyclone Outlook for the Southwest Pacific, which uses this SAM Index as one of the predictors (thanks to Andrew Magee)
+</p>
+<p>
+Comments should be addressed to Dr Gareth Marshall at <a href=mailto:GJMA@bas.ac.uk>GJMA@bas.ac.uk</a>.
+</p>
+</body>
+</html>

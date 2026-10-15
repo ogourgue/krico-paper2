@@ -1,0 +1,15 @@
+{
+  "data_url": "http://www.nerc-bas.ac.uk/public/icd/gjma/newsam.1957.2007.txt",
+  "page_url": "https://legacy.bas.ac.uk/met/gjma/sam.html",
+  "last_checked": "2026-10-15",
+  "page_sha256": "3dda767f879229dd9323cc6bb40bedcd5906f338bfac8a0207ac254f756e58d3",
+  "downloads": [
+    {
+      "date": "2026-10-15",
+      "data_sha256": "7158a4b1b70acbd26740ce394f1fbd2a560633cfa1e93929c6c90d5a19275a92",
+      "bytes": 5449,
+      "last_month": "2026-09",
+      "note": "initial download"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+# indices/
+
+Climate-index series for Paper 2 (`Paper 2/methodology.md` §5 and §7;
+P2-D08, P2-D09). Data, not exploration: this folder sits beside
+`ccamlr-data/`. One self-contained subfolder per index, each with
+
+- `fetch.py` (or `compute.py` for derived indices): downloads the source
+  files verbatim into `raw/`, computes sha256, writes `PROVENANCE.md`;
+  idempotent; `--check` compares the remote with `raw/` and writes nothing;
+- `tidy.py`: `raw/` → `<index>_monthly.csv`, one file per variable;
+- `README.md`: definition, sign convention, source, period, caveats.
+
+No shared code across subfolders and no imports from elsewhere in the
+repository, so each folder runs on its own. Window files and the joined
+year × subarea tables live with the analysis that uses them, not here.
+Pruning before release (P2-D09): folders never run against the outcomes
+are deleted; folders behind a negative result in the text stay.
+
+## Indices
+
+Build order: sam, asl, nino34, emi, orcadas, dipole, zw3. Rows are added
+as folders are built; "used in paper" is filled in from the window file.
+
+| Index | Folder | Variables | Source | Period | Used in paper |
+|---|---|---|---|---|---|
+| Marshall SAM | `sam/` | `sam_monthly.csv` | G. Marshall, BAS (station-based, Marshall 2003), <https://legacy.bas.ac.uk/met/gjma/sam.html> | 1957-01 – present (2026-09 on 15 Oct 2026) | tbd |
+
+## Common schema
+
+`year,month,value`: calendar year and month as integers, one row per
+month, values as published by the source, with the source's own sign and
+precision, no re-normalisation, no gap filling, no seasonal averaging. An
+index with several variables gets one file per variable
+(e.g. `asl_pressure_rel_monthly.csv`, `asl_longitude_monthly.csv`).
+
+## Sign conventions
+
+Each index keeps the sign its source defines; the positive phase is
+stated in the folder's `README.md` and summarised here:
+
+| Index | Positive phase means |
+|---|---|
+| Marshall SAM | higher pressure at 40°S relative to 65°S: stronger, poleward-shifted westerlies |
+
+Expected correlations (§5) are written for the **loss fractions** M1, M6
+and M5b and flip sign for success. The averaging window follows the
+outcome, not the cohort: Oct–Jan for M1 (October–December of the year
+before the spawning year, January of the spawning year), Mar–Jul for M6,
+the 200-day drift for M5b; lags tested 0, 3 and 6 months, no others.
+Monthly resolution is kept in these files; windows are applied in the
+analysis folder, after the expected signs are committed in the window
+file.
