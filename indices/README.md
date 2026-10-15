@@ -25,6 +25,7 @@ as folders are built; "used in paper" is filled in from the window file.
 |---|---|---|---|---|---|
 | Marshall SAM | `sam/` | `sam_monthly.csv` | G. Marshall, BAS (station-based, Marshall 2003), <https://legacy.bas.ac.uk/met/gjma/sam.html> | 1957-01 – present (2026-09 on 15 Oct 2026) | tbd |
 | Amundsen Sea Low (ASLI v3) | `asl/` | `asl_pressure_rel_monthly.csv`, `asl_longitude_monthly.csv`, `asl_latitude_monthly.csv`, `asl_pressure_actual_monthly.csv`, `asl_pressure_sector_monthly.csv` | BAS `asli` package on ERA5 (Hosking et al. 2016), <https://files.bas.ac.uk/twins/asli/asli_calculation_latest.csv> | 1959-01 – present (2026-07 on 15 Oct 2026) | tbd |
+| Niño 3.4 / ONI (+ relative) | `nino34/` | `nino34_monthly.csv`, `oni_monthly.csv`, `nino34_rel_monthly.csv`, `roni_monthly.csv` | NOAA CPC, ERSSTv6, <https://www.cpc.ncep.noaa.gov/data/indices/index.shtml> | monthly 1949-12 –, seasonal 1950-01 – present (2026-09 / 2026-08 on 15 Oct 2026) | tbd |
 
 ## Common schema
 
@@ -44,6 +45,7 @@ stated in the folder's `README.md` and summarised here:
 | Marshall SAM | higher pressure at 40°S relative to 65°S: stronger, poleward-shifted westerlies |
 | ASL relative central pressure | actual minus sector-mean pressure, hPa, always negative; a larger (less negative) value is a weaker low |
 | ASL longitude | degrees east, 170–298 (= 190°W–62°W); a larger value is a low further east, towards the Peninsula |
+| Niño 3.4, ONI, relative Niño 3.4, RONI | °C anomaly in the Niño 3.4 box; positive = warm, El Niño; seasonal values sit on the centre month of the 3-month season |
 
 Expected correlations (§5) are written for the **loss fractions** M1, M6
 and M5b and flip sign for success. The averaging window follows the

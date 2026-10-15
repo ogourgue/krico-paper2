@@ -1,0 +1,39 @@
+{
+  "data_urls": {
+    "detrend.nino34.ascii.txt": "https://www.cpc.ncep.noaa.gov/data/indices/detrend.nino34.ascii.txt",
+    "Rnino34.ascii.txt": "https://www.cpc.ncep.noaa.gov/data/indices/Rnino34.ascii.txt",
+    "oni.ascii.txt": "https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt",
+    "RONI.ascii.txt": "https://www.cpc.ncep.noaa.gov/data/indices/RONI.ascii.txt"
+  },
+  "page_url": "https://www.cpc.ncep.noaa.gov/data/indices/index.shtml",
+  "last_checked": "2026-10-15",
+  "page_sha256": "65a2d533a4d615ea05447184118c1c91856a95d1797e3d64ef227a211a4e7045",
+  "downloads": [
+    {
+      "date": "2026-10-15",
+      "files": {
+        "detrend.nino34.ascii.txt": {
+          "sha256": "3690a7883ef3e2a4d22fa5193e7294617de0fdf46b3398a56df11db74467a8e9",
+          "bytes": 30459,
+          "last_month": "2026-09"
+        },
+        "Rnino34.ascii.txt": {
+          "sha256": "a3a03f128f6d340199998c7b4dd0d6023d237008daf3e93e6e4a776f9a78a9db",
+          "bytes": 14768,
+          "last_month": "2026-09"
+        },
+        "oni.ascii.txt": {
+          "sha256": "5d6fa3a2f857d916550d39c2c686e94cb942430195c82518e6a5d0f5ffbd0665",
+          "bytes": 23025,
+          "last_month": "2026-08"
+        },
+        "RONI.ascii.txt": {
+          "sha256": "24d79a53c8c30aaf32200c08447291655fc1d693f11165793ba6d3aa378d98ff",
+          "bytes": 14736,
+          "last_month": "2026-08"
+        }
+      },
+      "note": "detrend.nino34.ascii.txt initial download, ends 2026-09; Rnino34.ascii.txt initial download, ends 2026-09; oni.ascii.txt initial download, ends 2026-08; RONI.ascii.txt initial download, ends 2026-08"
+    }
+  ]
+}
