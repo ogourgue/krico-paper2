@@ -1,0 +1,16 @@
+{
+  "data_url": "https://legacy.bas.ac.uk/met/READER/surface/Orcadas.All.temperature.html",
+  "page_url": "https://legacy.bas.ac.uk/met/READER/data.html",
+  "last_checked": "2026-10-16",
+  "page_sha256": "c789742434534d681b498d48d766d3ddb06cb60abe2618df5a556c347d9b131e",
+  "downloads": [
+    {
+      "date": "2026-10-16",
+      "table_produced": "14-Oct-2026",
+      "data_sha256": "81cb7a3259360b912228e1024d03ca831b45aecda73f16b47c864610c528e884",
+      "bytes": 85476,
+      "last_month": "2026-09",
+      "note": "initial download"
+    }
+  ]
+}
