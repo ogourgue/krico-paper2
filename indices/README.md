@@ -6,7 +6,9 @@ P2-D08, P2-D09). Data, not exploration: this folder sits beside
 
 - `fetch.py` (or `compute.py` for derived indices): downloads the source
   files verbatim into `raw/`, computes sha256, writes `PROVENANCE.md`;
-  idempotent; `--check` compares the remote with `raw/` and writes nothing;
+  idempotent; `--check` compares the remote with `raw/` and writes nothing.
+  A `compute.py` runs where the gridded input lives (ECMWF for the
+  Dipole) and leaves in `raw/` the small reduced table `tidy.py` needs;
 - `tidy.py`: `raw/` → `<index>_monthly.csv`, one file per variable;
 - `README.md`: definition, sign convention, source, period, caveats.
 
@@ -28,6 +30,7 @@ as folders are built; "used in paper" is filled in from the window file.
 | Niño 3.4 / ONI (+ relative) | `nino34/` | `nino34_monthly.csv`, `oni_monthly.csv`, `nino34_rel_monthly.csv`, `roni_monthly.csv` | NOAA CPC, ERSSTv6, <https://www.cpc.ncep.noaa.gov/data/indices/index.shtml> | monthly 1949-12 –, seasonal 1950-01 – present (2026-09 / 2026-08 on 15 Oct 2026) | tbd |
 | El Niño Modoki Index | `emi/` | `emi_monthly.csv` | JAMSTEC APL VirtualEarth (OISST v2, 1983–2015 base; Ashok et al. 2007), <https://www.jamstec.go.jp/virtualearth/general/en/index.html> | 1982-01 – present (2026-09 on 15 Oct 2026) | tbd |
 | Orcadas air temperature | `orcadas/` | `orcadas_monthly.csv`, `orcadas_obs_pct_monthly.csv`, `orcadas_origin_monthly.csv` | SCAR READER station table, BAS, <https://legacy.bas.ac.uk/met/READER/surface/Orcadas.All.temperature.html> | 1903-04 – present (2026-09 on 16 Oct 2026) | tbd |
+| Antarctic Dipole (computed) | `dipole/` | `dipole_monthly.csv`, `dipole_extent_monthly.csv`, `dipole_sia_pacific_monthly.csv`, `dipole_sia_weddell_monthly.csv`, `dipole_sie_pacific_monthly.csv`, `dipole_sie_weddell_monthly.csv` | computed by `compute.py` on ECMWF from NOAA/NSIDC G02202 v6 (`$KRICO_NSIDC`), sectors 130°W–60°W and 60°W–20°W, base 1994–2024 | 1993-10 – 2025-10 | tbd |
 
 ## Common schema
 
@@ -50,6 +53,7 @@ stated in the folder's `README.md` and summarised here:
 | Niño 3.4, ONI, relative Niño 3.4, RONI | °C anomaly in the Niño 3.4 box; positive = warm, El Niño; seasonal values sit on the centre month of the 3-month season |
 | EMI | °C, central box minus half of each flank; positive = warm centre with cool ends, a Central-Pacific (Modoki) event |
 | Orcadas | °C monthly mean air temperature; warmer is larger; percentage of reports and data-origin colour in companion files |
+| Antarctic Dipole | 10⁶ km², Bellingshausen–Amundsen area anomaly minus Weddell area anomaly; positive = more ice on the Pacific side than on the Weddell side |
 
 Expected correlations (§5) are written for the **loss fractions** M1, M6
 and M5b and flip sign for success. The averaging window follows the
