@@ -1,0 +1,21 @@
+{
+  "pacific": {
+    "lon_west": -130.0,
+    "lon_east": -60.0,
+    "ocean_cells": 13775,
+    "ocean_area_1e6km2": 7.985
+  },
+  "weddell": {
+    "lon_west": -60.0,
+    "lon_east": -20.0,
+    "ocean_cells": 13522,
+    "ocean_area_1e6km2": 7.5391
+  },
+  "_notes": {
+    "ocean_flag": 50,
+    "extent_threshold": 0.15,
+    "min_valid_fraction": 0.5,
+    "cell_area": "ellipsoidal polar stereographic scale factor, true at 70S",
+    "units": "1e6 km2"
+  }
+}
