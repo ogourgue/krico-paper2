@@ -1,8 +1,10 @@
 """
 Where does the ice-source signature live? Panel (b) of plot_ice_source.py
-repeated per release subarea: NSIDC minus GLORYS12, in percentage points of
-the particles released in that subarea, per spawning year, for success, M1,
-M5b and M6, with 2019 marked. One panel per subarea, 2 x 3: the four
+repeated per release subarea: one difference between two ice readings
+(--difference product, the default: NSIDC minus GLORYS12-on-25-km;
+resolution: GLORYS12-on-25-km minus native GLORYS12; total: NSIDC minus
+GLORYS12), in percentage points of the particles released in that subarea,
+per spawning year, for success, M1, M5b and M6, with 2019 marked. One panel per subarea, 2 x 3: the four
 recruiting subareas (88.3, 48.1, 48.2, 48.4) and the two where M1 is large
 (48.5, 48.6S), where a flip of the M1 difference at the forcing change
 would show most clearly.
@@ -12,15 +14,15 @@ do not sum to the domain panel of plot_ice_source.py; the domain panel is
 the release-weighted sum.
 
 Above each panel: the pre/post-2019 shift of each outcome's
-difference, in pp (S = success). Stdout: the full shift table with the
-ice-state check, per subarea.
+difference, in pp (S = success). Stdout: the shift tables with the
+ice-state check for all three differences, per subarea.
 
 Inputs:  ../timeseries/data/aggregated_subarea.nc   (GLORYS12 ice, production)
          data/aggregated_subarea_nsidc.nc           (NSIDC ice, aggregate_nsidc.py)
-Output:  timeseries_ice_source_subarea.png
+Output:  timeseries_ice_source_subarea[_DIFFERENCE].png (no suffix for product)
 
 Usage:
-  python plot_ice_source_subarea.py [--out PATH]
+  python plot_ice_source_subarea.py [--difference product|resolution|total] [--out PATH]
 """
 
 from __future__ import annotations
@@ -32,8 +34,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import xarray as xr
 
-from plot_ice_source import (DIFF_LAYERS, FILES, FORCING_STEP_YEAR, HERE, LABELS,
-                             layer_colors, print_shift_table, season_mean_fractions)
+from plot_ice_source import (DIFF_LAYERS, DIFFERENCES, FILES, FORCING_STEP_YEAR, HERE, LABELS,
+                             differences, layer_colors, print_shift_table,
+                             season_mean_fractions)
 
 SUBAREAS = ["88.3", "48.1", "48.2", "48.4", "48.5", "48.6S"]
 FIGSIZE = (9.32, 5.6)
@@ -41,9 +44,12 @@ FIGSIZE = (9.32, 5.6)
 
 def main() -> None:
     ap = argparse.ArgumentParser()
+    ap.add_argument("--difference", choices=sorted(DIFFERENCES), default="product")
     ap.add_argument("--out", default=None)
     args = ap.parse_args()
-    out = Path(args.out) if args.out else HERE / "timeseries_ice_source_subarea.png"
+    suffix = "" if args.difference == "product" else f"_{args.difference}"
+    out = Path(args.out) if args.out else HERE / f"timeseries_ice_source_subarea{suffix}.png"
+    a_name, b_name = DIFFERENCES[args.difference]
 
     per_subarea = {}
     for sub in SUBAREAS:
@@ -52,7 +58,7 @@ def main() -> None:
             with xr.open_dataset(path) as ds:
                 years, season, names = season_mean_fractions(ds, sub)
                 runs[name] = season
-        per_subarea[sub] = (years, runs, runs["NSIDC"] - runs["GLORYS12"], names)
+        per_subarea[sub] = (years, runs, differences(runs)[args.difference], names)
     colors = layer_colors()
 
     fig, axes = plt.subplots(2, 3, figsize=FIGSIZE, sharex=True,
@@ -79,7 +85,7 @@ def main() -> None:
     for ax in axes[1]:
         ax.set_xlabel("Spawning year", fontsize=10)
     for ax in axes[:, 0]:
-        ax.set_ylabel("NSIDC minus GLORYS12 (pp)", fontsize=10)
+        ax.set_ylabel(f"{a_name} minus {b_name} (pp)", fontsize=10)
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, frameon=False, fontsize=9, ncol=4,
                loc="lower center", bbox_to_anchor=(0.5, -0.04))
@@ -87,8 +93,11 @@ def main() -> None:
     print(f"Wrote {out}")
 
     for sub in SUBAREAS:
-        years, runs, diff, names = per_subarea[sub]
-        print_shift_table(years, runs, diff, names, f"released in {sub} (pp of its own releases)")
+        years, runs, _, names = per_subarea[sub]
+        diffs = differences(runs)
+        for which in ("product", "resolution", "total"):
+            print_shift_table(years, runs, diffs[which], names,
+                              f"released in {sub} (pp of its own releases)", which)
 
 
 if __name__ == "__main__":

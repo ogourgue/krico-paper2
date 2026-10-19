@@ -1,31 +1,32 @@
 """
 Ice-source test for the end-2018 GLORYS12 forcing change: the recruitment
-classification run with GLORYS12 sea ice against the same trajectories
-classified with NSIDC G02202 v6 sea ice.
+classification run with GLORYS12 sea ice, with GLORYS12 sea ice binned onto
+the NSIDC 25 km grid, and with NSIDC G02202 v6 sea ice, on the same
+trajectories.
 
-  (a) Season-mean recruitment success per spawning year under both ice
+  (a) Season-mean recruitment success per spawning year under the three ice
       readings, on one axis, with the 2019 forcing step marked.
-  (b) NSIDC minus GLORYS12, in percentage points of released particles, per
-      spawning year, for success and the three ice-dependent outcomes
-      (M1, M5b, M6), with the step marked.
+  (b) Per spawning year and outcome (success, M1, M5b, M6), in percentage
+      points of released particles: solid, NSIDC minus GLORYS12-on-25-km,
+      the product difference at equal resolution; dashed, GLORYS12-on-25-km
+      minus native GLORYS12, the resolution and sampling difference. Their
+      sum is the total NSIDC-minus-GLORYS12 difference.
 
-The test reads as follows. The two series differ by construction (25 km
-observed cells against 4 km reanalysis cells, the 80 % M1 threshold on a
-coarser field), so the level of the difference is not the point. What the
-forcing change would produce is a change in the difference at 2019: if the
-reanalysis ice drifted relative to observations when the atmosphere switched,
-the NSIDC-minus-GLORYS12 curve steps there. A flat difference across 2019
-means the post-2018 signal in the ice-dependent outcomes is in the observed
-ice too. The circulation behind M5b is GLORYS12 in both runs and is not tested
-here.
+The test reads as follows. The level of each difference is a product or
+resolution gap and is not the point. What the forcing change would produce is
+a change at 2019: if the reanalysis ice drifted relative to observations when
+the atmosphere switched, the product difference steps there while the
+resolution difference does not, since the grids do not change. The
+circulation behind M5b is GLORYS12 in all three runs and is not tested here.
 
 Domain-wide by default (sum of counts_release over subareas); --subarea CODE
 restricts to the particles released in one subarea (88.3, 48.1, 48.2, 48.3,
 48.4, 48.5, 48.6N, 48.6S). Season mean, censored folded into M6, F3 palette
 and the slide figure size follow plot_domain.py.
 
-Inputs:  ../timeseries/data/aggregated_subarea.nc   (GLORYS12 ice, production)
-         data/aggregated_subarea_nsidc.nc           (NSIDC ice, aggregate_nsidc.py)
+Inputs:  ../timeseries/data/aggregated_subarea.nc         (GLORYS12 ice, production)
+         data/aggregated_subarea_glorys12_25km.nc         (GLORYS12 ice on 25 km, aggregate_glorys12_25km.py)
+         data/aggregated_subarea_nsidc.nc                 (NSIDC ice, aggregate_nsidc.py)
 Output:  timeseries_ice_source[_SUBAREA].png + stdout table
 
 The stdout ends with an ice-state check per outcome: the product gap depends
@@ -80,11 +81,19 @@ DIFF_LAYERS = ["success", "killed_M1", "killed_M5_not_on_shelf", "killed_M6_no_a
 HERE = Path(__file__).resolve().parent
 FILES = {
     "GLORYS12": HERE.parent / "timeseries" / "data" / "aggregated_subarea.nc",
+    "GLORYS12-25km": HERE / "data" / "aggregated_subarea_glorys12_25km.nc",
     "NSIDC": HERE / "data" / "aggregated_subarea_nsidc.nc",
 }
 STYLE = {
     "GLORYS12": dict(color="C2", ls="-", marker="o", mfc="white"),
+    "GLORYS12-25km": dict(color="0.45", ls="-", marker="^", mfc="white"),
     "NSIDC": dict(color="C0", ls="-", marker="s", mfc="white"),
+}
+# The three differences, name -> (minuend, subtrahend)
+DIFFERENCES = {
+    "product": ("NSIDC", "GLORYS12-25km"),        # at equal resolution
+    "resolution": ("GLORYS12-25km", "GLORYS12"),  # resolution and sampling
+    "total": ("NSIDC", "GLORYS12"),
 }
 
 
@@ -152,19 +161,24 @@ def ice_state_check(years: np.ndarray, level: np.ndarray, diff: np.ndarray,
                 n_post=int(post.sum()))
 
 
+def differences(runs: dict) -> dict:
+    return {k: runs[a] - runs[b] for k, (a, b) in DIFFERENCES.items()}
+
+
 def print_shift_table(years: np.ndarray, runs: dict, diff: np.ndarray, names: list[str],
-                      scope: str) -> None:
+                      scope: str, which: str = "total") -> None:
+    a_name, b_name = DIFFERENCES[which]
     pre = years < FORCING_STEP_YEAR
     post = ~pre
-    print(f"\nNSIDC minus GLORYS12, {scope}: mean (sd) over years, pre-{FORCING_STEP_YEAR} "
-          f"n={pre.sum()} vs {FORCING_STEP_YEAR}-{years[-1]} n={post.sum()}; Welch t for a "
-          f"change at the step; r between the two series; ice-state check")
+    print(f"\n{a_name} minus {b_name} ({which}), {scope}: mean (sd) over years, "
+          f"pre-{FORCING_STEP_YEAR} n={pre.sum()} vs {FORCING_STEP_YEAR}-{years[-1]} n={post.sum()}; "
+          f"Welch t for a change at the step; r between the two series; ice-state check")
     for l in DIFF_LAYERS:
         li = names.index(l)
         a, b = diff[pre, li], diff[post, li]
         se = np.sqrt(a.var(ddof=1) / a.size + b.var(ddof=1) / b.size)
         t = (b.mean() - a.mean()) / se if se > 0 else np.nan
-        r = np.corrcoef(runs["GLORYS12"][:, li], runs["NSIDC"][:, li])[0, 1]
+        r = np.corrcoef(runs[a_name][:, li], runs[b_name][:, li])[0, 1]
         c = ice_state_check(years, runs["GLORYS12"][:, li], diff[:, li])
         print(f"  {LABELS[l]:28s} pre {a.mean():+5.2f} ({a.std(ddof=1):4.2f})  "
               f"post {b.mean():+5.2f} ({b.std(ddof=1):4.2f})  shift {b.mean() - a.mean():+5.2f} pp  "
@@ -192,7 +206,7 @@ def main() -> None:
             years, season, names = season_mean_fractions(ds, args.subarea)
             runs[name] = season
             print(f"{name:9s} {path.name}: sic_source = {ds.attrs.get('sic_source', '?')}")
-    diff = runs["NSIDC"] - runs["GLORYS12"]                 # (year, outcome), pp
+    diffs = differences(runs)                               # each (year, outcome), pp
     colors = layer_colors()
     scope = f"released in {args.subarea}" if args.subarea else "domain"
 
@@ -203,25 +217,31 @@ def main() -> None:
     for name, season in runs.items():
         ax_a.plot(years, season[:, si], ms=5, lw=1.3, label=f"{name} ice", **STYLE[name])
     ax_a.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.9)
-    ax_a.set_ylim(0, None)
+    ymax = max(np.nanmax(season[:, si]) for season in runs.values())
+    ax_a.set_ylim(0, 1.3 * ymax)            # headroom for the legend
     y1 = ax_a.get_ylim()[1]
     ax_a.text(FORCING_STEP_YEAR - 0.8, 0.03 * y1, "ERA-Interim", fontsize=8, color="0.4", ha="right")
     ax_a.text(FORCING_STEP_YEAR - 0.2, 0.03 * y1, "ERA5", fontsize=8, color="0.4")
     ax_a.set_ylabel("Season-mean success (%)")
     ax_a.set_xlabel("Spawning year")
     ax_a.set_title(scope, fontsize=10, loc="left")
-    ax_a.legend(frameon=False, fontsize=9, loc="upper left")
+    ax_a.legend(frameon=False, fontsize=8, loc="upper left", ncol=3, columnspacing=1.0,
+                handlelength=1.6)
     ax_a.grid(axis="y", lw=0.4, alpha=0.5)
 
-    # ---- (b) NSIDC minus GLORYS12 per outcome
+    # ---- (b) product difference (solid) and resolution difference (dashed) per outcome
     for layer in DIFF_LAYERS:
         li = names.index(layer)
-        ax_b.plot(years, diff[:, li], color=colors[layer], lw=1.3, marker="o", ms=3.5,
-                  label=LABELS[layer])
+        ax_b.plot(years, diffs["product"][:, li], color=colors[layer], lw=1.3, marker="o",
+                  ms=3.5, label=LABELS[layer])
+        ax_b.plot(years, diffs["resolution"][:, li], color=colors[layer], lw=1.0, ls="--",
+                  marker="o", ms=2, mfc="white")
     ax_b.axhline(0, color="0.3", lw=0.8)
     ax_b.axvline(FORCING_STEP_YEAR - 0.5, color="0.5", ls=":", lw=0.9)
-    ax_b.set_ylabel("NSIDC minus GLORYS12 (pp)")
+    ax_b.set_ylabel("Difference (pp)")
     ax_b.set_xlabel("Spawning year")
+    ax_b.set_title("solid: NSIDC − GLORYS12-25km (product)   dashed: GLORYS12-25km − GLORYS12 (resolution)",
+                   fontsize=7.5, loc="left", color="0.3")
     ax_b.grid(axis="y", lw=0.4, alpha=0.5)
     handles, labels = ax_b.get_legend_handles_labels()
     fig.legend(handles, labels, frameon=False, fontsize=9, ncol=4,
@@ -231,22 +251,24 @@ def main() -> None:
     print(f"Wrote {out}")
 
     # ---- numbers
-    pre = years < FORCING_STEP_YEAR
-    post = ~pre
-    print(f"\nSeason-mean shares (% of released), {scope}, censored folded into M6")
-    head = "year  " + "  ".join(f"{LABELS[l][:14]:>14s}" for l in DIFF_LAYERS)
+    print(f"\nSeason-mean shares (% of released), {scope}, censored folded into M6; "
+          f"G = GLORYS12, G25 = GLORYS12 on 25 km, N = NSIDC")
+    head = "year  " + "  ".join(f"{LABELS[l][:16]:>16s}" for l in DIFF_LAYERS)
     print(head)
-    print("      " + "  ".join(f"{'G / N / N-G':>14s}" for _ in DIFF_LAYERS))
+    print("      " + "  ".join(f"{'G / G25 / N':>16s}" for _ in DIFF_LAYERS))
     for k, y in enumerate(years):
         cells = []
         for l in DIFF_LAYERS:
             li = names.index(l)
-            cells.append(f"{runs['GLORYS12'][k, li]:4.1f}/{runs['NSIDC'][k, li]:4.1f}/{diff[k, li]:+4.1f}")
-        print(f"{y}  " + "  ".join(f"{c:>14s}" for c in cells))
+            cells.append(f"{runs['GLORYS12'][k, li]:4.1f}/{runs['GLORYS12-25km'][k, li]:4.1f}"
+                         f"/{runs['NSIDC'][k, li]:4.1f}")
+        print(f"{y}  " + "  ".join(f"{c:>16s}" for c in cells))
 
-    print_shift_table(years, runs, diff, names, scope)
-    print("\nThe level of each difference is the product gap. A shift at the step that the "
-          "ice-state check does not predict is the forcing signature; t is indicative only (n = 25 vs 7).")
+    for which in ("product", "resolution", "total"):
+        print_shift_table(years, runs, diffs[which], names, scope, which)
+    print("\nThe level of each difference is a product or resolution gap. A shift at the step in the "
+          "product difference that the ice-state check does not predict, with no shift in the "
+          "resolution difference, is the forcing signature; t is indicative only (n = 25 vs 7).")
 
 
 if __name__ == "__main__":
