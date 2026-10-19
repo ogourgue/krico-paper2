@@ -9,6 +9,8 @@ P2-D08, P2-D09). Data, not exploration: this folder sits beside
   idempotent; `--check` compares the remote with `raw/` and writes nothing.
   A `compute.py` runs where the gridded input lives (ECMWF for the
   Dipole) and leaves in `raw/` the small reduced table `tidy.py` needs;
+  for zw3, `fetch.py` downloads ERA5 through the CDS API and
+  `compute.py` writes the monthly files directly;
 - `tidy.py`: `raw/` → `<index>_monthly.csv`, one file per variable;
 - `README.md`: definition, sign convention, source, period, caveats.
 
@@ -31,6 +33,7 @@ as folders are built; "used in paper" is filled in from the window file.
 | El Niño Modoki Index | `emi/` | `emi_monthly.csv` | JAMSTEC APL VirtualEarth (OISST v2, 1983–2015 base; Ashok et al. 2007), <https://www.jamstec.go.jp/virtualearth/general/en/index.html> | 1982-01 – present (2026-09 on 15 Oct 2026) | tbd |
 | Orcadas air temperature | `orcadas/` | `orcadas_monthly.csv`, `orcadas_obs_pct_monthly.csv`, `orcadas_origin_monthly.csv` | SCAR READER station table, BAS, <https://legacy.bas.ac.uk/met/READER/surface/Orcadas.All.temperature.html> | 1903-04 – present (2026-09 on 16 Oct 2026) | tbd |
 | Antarctic Dipole (computed) | `dipole/` | `dipole_monthly.csv`, `dipole_extent_monthly.csv`, `dipole_sia_pacific_monthly.csv`, `dipole_sia_weddell_monthly.csv`, `dipole_sie_pacific_monthly.csv`, `dipole_sie_weddell_monthly.csv` | computed by `compute.py` on ECMWF from NOAA/NSIDC G02202 v6 (`$KRICO_NSIDC`), sectors 130°W–60°W and 60°W–20°W, base 1994–2024 | 1993-10 – 2025-10 | tbd |
+| Zonal wave 3 (computed) | `zw3/` | `zw3_magnitude_monthly.csv`, `zw3_phase_monthly.csv`, `zw3_pc1_monthly.csv`, `zw3_pc2_monthly.csv` | computed by `compute.py` from ERA5 v500 (CDS, `cdsapi`), method of Goyal et al. (2022), signs matched to Mendeley 10.17632/382gmc8937.1 | 1979-01 – present | tbd |
 
 ## Common schema
 
@@ -54,6 +57,7 @@ stated in the folder's `README.md` and summarised here:
 | EMI | °C, central box minus half of each flank; positive = warm centre with cool ends, a Central-Pacific (Modoki) event |
 | Orcadas | °C monthly mean air temperature; warmer is larger; percentage of reports and data-origin colour in companion files |
 | Antarctic Dipole | 10⁶ km², Bellingshausen–Amundsen area anomaly minus Weddell area anomaly; positive = more ice on the Pacific side than on the Weddell side |
+| ZW3 | magnitude dimensionless (√(PC1²+PC2²), unit-variance PCs); phase in degrees −180 to 180, EOF signs matched to the published series; used through phase composites, not linear correlation |
 
 Expected correlations (§5) are written for the **loss fractions** M1, M6
 and M5b and flip sign for success. The averaging window follows the

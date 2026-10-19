@@ -1,0 +1,34 @@
+{
+  "run": "2026-10-19",
+  "input": "era5_v500_monthly.nc",
+  "input_sha256": "1d789cdf59ec2d160e8df74c63ed5ca08c4335d8e2caffef78f4d7930e3c3928",
+  "grid": {
+    "nlat": 31,
+    "nlon": 360,
+    "dlat": 1.0
+  },
+  "months": 573,
+  "first_month": "1979-01",
+  "last_month": "2026-09",
+  "base_period": [
+    1979,
+    2020
+  ],
+  "variance_fraction_eof1_to_4": [
+    0.211,
+    0.1657,
+    0.1164,
+    0.1093
+  ],
+  "sign_alignment": {
+    "status": "aligned to reference",
+    "months": 518,
+    "swapped": false,
+    "sign_pc1": -1,
+    "sign_pc2": -1,
+    "r_pc1": 0.9998,
+    "r_pc2": 0.9994,
+    "r_magnitude": 0.9991,
+    "reference_file": "ZW3index_Goyaletal2022JCLI.nc"
+  }
+}

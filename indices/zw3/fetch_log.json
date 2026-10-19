@@ -1,0 +1,31 @@
+{
+  "era5": {
+    "date": "2026-10-19",
+    "dataset": "reanalysis-era5-pressure-levels-monthly-means",
+    "last_year_requested": "2026",
+    "bytes": 15198075,
+    "sha256": "1d789cdf59ec2d160e8df74c63ed5ca08c4335d8e2caffef78f4d7930e3c3928"
+  },
+  "mendeley": {
+    "date": "2026-10-19",
+    "doi": "10.17632/382gmc8937.1",
+    "files": [
+      {
+        "filename": "zw3index_Goyaletal2022.csv",
+        "url": "https://data.mendeley.com/public-files/datasets/382gmc8937/files/6a23f41b-132c-4d4a-8ad9-fbd4334e9c77/file_downloaded",
+        "size": 24831,
+        "sha256_listed": null,
+        "sha256": "6d1192401bf8f2b6edca3c4379e5a053bde9cf34d16ec322ba3ef21978e18371",
+        "bytes": 24831
+      },
+      {
+        "filename": "ZW3index_Goyaletal2022JCLI.nc",
+        "url": "https://data.mendeley.com/public-files/datasets/382gmc8937/files/3b80602f-03e2-4d86-81ef-6576302282ed/file_downloaded",
+        "size": 114707,
+        "sha256_listed": null,
+        "sha256": "cfc407f93c5b28c01025bf68813860fb97c375516e5e5a571ee1de835f8df402",
+        "bytes": 114707
+      }
+    ]
+  }
+}
