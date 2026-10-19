@@ -37,9 +37,11 @@ of record and `compute.py` reproduces it with a plain SVD. Period
 (SCAR AntClimNow replots it to the present but serves only figures), so
 the extension past 2020 is ours; the authors' grid is not stated, and 1°
 is adequate for a three-crest wave, with the overlap correlations as the
-check; the ERA5 file is the one `raw/` item too large to read by eye
-(about 25 MB) and is committed because ERA5 is CC-BY 4.0; the index is
-built on ERA5 throughout and is therefore homogeneous across the
+check; the ERA5 file (about 15 MB) is not committed, because the CDS is
+a versioned, DOI'd source anyone can re-download: `raw/era5_request.json`
+is the recipe and the sha256 in `PROVENANCE.md` the check, so a fresh
+clone runs `python fetch.py --era5-only` before `compute.py`; the index
+is built on ERA5 throughout and is therefore homogeneous across the
 end-2018 GLORYS12 forcing switch, which is the point of using it. Licence:
 CC-BY 4.0 for ERA5 and for the Mendeley files; cite Goyal et al. (2022)
 and Hersbach et al. (2020).

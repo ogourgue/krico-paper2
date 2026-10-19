@@ -28,8 +28,10 @@ ERA5 licence accepted once on the dataset page, and `pip install cdsapi`
 download_format). Standard library otherwise. Nothing is imported from
 elsewhere in the repository.
 
-ERA5 is released under CC-BY 4.0 (Copernicus), which allows the file to
-be committed; the Mendeley files are CC-BY 4.0 as well.
+ERA5 is released under CC-BY 4.0 (Copernicus). The downloaded field is
+not committed (it is re-downloadable from a versioned, DOI'd source; the
+request file and the sha256 in PROVENANCE.md are the record); the
+Mendeley files are CC-BY 4.0 as well and stay in raw/mendeley/.
 """
 from __future__ import annotations
 
