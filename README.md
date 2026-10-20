@@ -27,7 +27,8 @@ Same scheme as krico-paper1, plus one folder for work in progress:
 
 | Folder | Manuscript item | Status |
 |---|---|---|
-| `F1_timeseries` | Figure 1 — interannual recruitment time series, domain and per subarea | domain panels done; per-subarea awaiting ECMWF run |
+| `F1_domain_map` | Figure 1 — map: (a) Paper 1's Fig. 1; (b) index regions | not started, built last |
+| `F2_domain_timeseries` | Figure 2 — domain time series, success and composition, NSIDC ice | done |
 
 `ccamlr-data/` holds the CCAMLR statistical-area shapefile (EPSG:4326),
 copied from krico-paper1 so this repo is self-contained.
@@ -36,8 +37,8 @@ copied from krico-paper1 so this repo is self-contained.
 
 Each `F*` folder reads committed `data/*.nc` with `plot*.py` scripts and
 needs no HPC access; the `aggregate*.py` scripts that produce those files
-run on ECMWF against `$KRICO_POST/recruitment/data/`. Per-folder READMEs
-give the details.
+run on the laptop against `$KRICO_POST/recruitment/data_nsidc/`, the cohort
+files rsynced from ECMWF. Per-folder READMEs give the details.
 
 ## License
 

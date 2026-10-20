@@ -24,3 +24,6 @@ explore/**/data/
 indices/zw3/raw/era5_v500_monthly.nc
 local/subarea/raw/*.nc
 local/orcadas_fill/raw/*.nc
+
+# Paper figure PDFs are committed (the LaTeX conversion needs them).
+!F*/*.pdf
