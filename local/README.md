@@ -36,12 +36,14 @@ added as folders are built; each folder fetches its own inputs.
 |---|---|---|---|---|
 | Subarea and box series from ERA5 | `subarea/` | `v10_band_<sub>`, `t2m_band_<sub>` (sub = 883, 481, 482, 484; weighted over the release cells of `raw/spawning_cells.csv`), `u10_south_orkney`, `v10_south_orkney` (60–62.5°S, 41–48°W, Young 2024), `u10_nw_weddell`, `v10_nw_weddell` (59.5–65°S, 39–55°W, Young 2024), `curl_weddell_gyre` (62–70°S, 60°W–0°, Auckland 2024, 10⁻⁷ N m⁻³), `sst_north_edge` (55–60°S, 20–35°W, after Kusahara 2025) | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `subarea/raw/era5_request.json`; GLORYS12 bathymetry and the CCAMLR shapefile for the cells | 1993-01 – 2025-12 |
 | Orcadas fill | `orcadas_fill/` | `orcadas_filled` (station series, °C, seven 2020–2023 May–Jul months replaced by ERA5 plus a per-calendar-month offset learned in clean years), `orcadas_filled_flag` (0 station, 1 fill), `era5_t2m_orcadas` (ERA5 at the station, K) | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `orcadas_fill/raw/era5_request.json`, native 0.25°; station series and report percentages from `indices/orcadas/` | station 1903-04 – 2026-09, ERA5 1993-01 – 2025-12 |
+| Ice timing | `ice_timing/` | `retreat_<sub>`, `advance_<sub>` (day-of-year, 365-day calendar) and `retreat_<sub>_share`, `advance_<sub>_share` (weight share with the event), sub = 883, 481, 482, 484; annual, one row per spawning year; Stammerjohn 15%/5-day with the 1 April cutoff of the classification; per-cell table in `ice_timing/raw/` | NOAA/NSIDC G02202 v6 daily, doi:10.7265/b18j-z797, stacked under `$KRICO_NSIDC` on ECMWF (`compute.py` there, `tidy.py` on the laptop) | spawning years 1994 – 2025 |
 
 ## Conventions
 
 - Reduced tables use the `indices/` schema, `year,month,value`, one file
   per variable and region, calendar months, no seasonal averaging, no gap
-  filling (the one exception, the Orcadas fill, is a separate file that
+  filling; the ice-timing series are annual by nature and use `year,value`
+  with the spawning year (the one exception, the Orcadas fill, is a separate file that
   says so in its name and leaves the station file untouched). Windows
   (Oct–Jan for M1, Mar–Jul for M6, the 200-day drift for M5b) are applied
   in the analysis folder, after the expected signs are committed there.
