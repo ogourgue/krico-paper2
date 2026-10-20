@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-20",
+  "table_sha256": "3ece9473cdea39fce5219c9a49e58b236559fd117b09bb6fadf99bd2d78d13e7",
+  "info": {
+    "ice_years": [
+      1993,
+      2025
+    ],
+    "spawning_years": [
+      1994,
+      2025
+    ],
+    "subareas": {
+      "88.3": {
+        "cells": 193,
+        "weight": 32106.0,
+        "retreat_mean": 369.665625,
+        "retreat_share_mean": 0.572875,
+        "advance_mean": 108.290625,
+        "advance_share_mean": 0.991125,
+        "apr1_share_mean": 0.47683242441231605
+      },
+      "48.1": {
+        "cells": 242,
+        "weight": 49193.0,
+        "retreat_mean": 295.109375,
+        "retreat_share_mean": 0.8525,
+        "advance_mean": 144.95,
+        "advance_share_mean": 0.9535625,
+        "apr1_share_mean": 0.20270991992578397
+      },
+      "48.2": {
+        "cells": 356,
+        "weight": 81670.0,
+        "retreat_mean": 328.24687500000005,
+        "retreat_share_mean": 0.9713125,
+        "advance_mean": 150.50625,
+        "advance_share_mean": 0.979625,
+        "apr1_share_mean": 0.03035015268393498
+      },
+      "48.4": {
+        "cells": 146,
+        "weight": 34586.0,
+        "retreat_mean": 327.00312499999995,
+        "retreat_share_mean": 0.9124687499999999,
+        "advance_mean": 175.80624999999998,
+        "advance_share_mean": 0.9125,
+        "apr1_share_mean": 0.0
+      }
+    }
+  },
+  "outputs": [
+    "retreat_883_annual",
+    "retreat_883_share_annual",
+    "advance_883_annual",
+    "advance_883_share_annual",
+    "retreat_481_annual",
+    "retreat_481_share_annual",
+    "advance_481_annual",
+    "advance_481_share_annual",
+    "retreat_482_annual",
+    "retreat_482_share_annual",
+    "advance_482_annual",
+    "advance_482_share_annual",
+    "retreat_484_annual",
+    "retreat_484_share_annual",
+    "advance_484_annual",
+    "advance_484_share_annual"
+  ]
+}

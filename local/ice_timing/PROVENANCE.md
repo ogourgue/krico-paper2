@@ -23,3 +23,9 @@ Written by `compute.py`; do not edit by hand. Machine-readable copy in
 - Per subarea (weight share with an advance, with a retreat; weighted mean advance and retreat day; interpolated days): 48.1: 0.95, 0.84, 145, 296, 0; 48.2: 0.98, 0.97, 151, 328, 0; 48.3: 0.01, 0.01, 250, 265, 0; 48.4: 0.91, 0.91, 175, 326, 0; 48.5: 1.00, 0.10, 91, 387, 0; 48.6: 0.60, 0.47, 123, 357, 0; 88.3: 0.99, 0.58, 108, 369, 0
 - Output: raw/cells.csv, raw/cell_timing.csv
 
+## Tidied series (tidy.py)
+
+- Run: 2026-10-20 UTC on `raw/cell_timing.csv` (sha256 `3ece9473cdea…`)
+- Spawning years 1994-2025 from ice years 1993-2025 (retreat of Y-1, advance of Y)
+- Per subarea (cells; mean retreat day and weight share; mean advance day and weight share; weight share already in ice on 1 April): 88.3: 193; 370, 0.57; 108, 0.99; 0.48; 48.1: 242; 295, 0.85; 145, 0.95; 0.20; 48.2: 356; 328, 0.97; 151, 0.98; 0.03; 48.4: 146; 327, 0.91; 176, 0.91; 0.00
+- Output: retreat_883_annual.csv, retreat_883_share_annual.csv, advance_883_annual.csv, advance_883_share_annual.csv, retreat_481_annual.csv, retreat_481_share_annual.csv, advance_481_annual.csv, advance_481_share_annual.csv, retreat_482_annual.csv, retreat_482_share_annual.csv, advance_482_annual.csv, advance_482_share_annual.csv, retreat_484_annual.csv, retreat_484_share_annual.csv, advance_484_annual.csv, advance_484_share_annual.csv
