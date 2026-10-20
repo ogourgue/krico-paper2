@@ -1,0 +1,74 @@
+{
+  "dataset": "reanalysis-era5-single-levels-monthly-means",
+  "doi": "10.24381/cds.f17050d7",
+  "downloads": [
+    {
+      "date": "2026-10-20",
+      "cdsapi_version": "?",
+      "request_file": "era5_request.json",
+      "files": [
+        {
+          "name": "era5_orcadas_monthly.nc",
+          "member": null,
+          "bytes": 134437,
+          "sha256": "e56efd897e590f25520efb4d2318d493af4c9bc465fafbac1bad38ba6cce29e6"
+        }
+      ],
+      "structure": {
+        "files": [
+          "era5_orcadas_monthly.nc"
+        ],
+        "dims": {
+          "valid_time": 396,
+          "latitude": 9,
+          "longitude": 13
+        },
+        "first_month": "1993-01",
+        "last_month": "2025-12",
+        "n_months": 396,
+        "latitude": [
+          -62.0,
+          -60.0
+        ],
+        "longitude": [
+          -46.0,
+          -43.0
+        ],
+        "variables": {
+          "t2m": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "K",
+            "dtype": "float32",
+            "min": 250.34066772460938,
+            "max": 275.3958740234375,
+            "nan_fraction": 0.0
+          },
+          "lsm": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "(0 - 1)",
+            "dtype": "float32",
+            "min": 0.0,
+            "max": 0.20098865032196045,
+            "nan_fraction": 0.0
+          }
+        },
+        "warnings": [],
+        "lsm_around_station": {
+          "-60.75,-44.75": 0.005654692649841309,
+          "-60.75,-44.50": 0.015411972999572754,
+          "-60.50,-44.75": 0.005413174629211426,
+          "-60.50,-44.50": 0.0025734901428222656
+        }
+      },
+      "changed_since_previous": null
+    }
+  ]
+}

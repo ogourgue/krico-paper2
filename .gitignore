@@ -23,3 +23,4 @@ explore/**/data/
 # and anyone can re-download the same bytes with fetch.py.
 indices/zw3/raw/era5_v500_monthly.nc
 local/subarea/raw/*.nc
+local/orcadas_fill/raw/*.nc

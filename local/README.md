@@ -35,6 +35,7 @@ added as folders are built; each folder fetches its own inputs.
 | Group | Folder | Variables | Source | Period |
 |---|---|---|---|---|
 | Subarea and box series from ERA5 | `subarea/` | `v10_band_<sub>`, `t2m_band_<sub>` (sub = 883, 481, 482, 484; weighted over the release cells of `raw/spawning_cells.csv`), `u10_south_orkney`, `v10_south_orkney` (60–62.5°S, 41–48°W, Young 2024), `u10_nw_weddell`, `v10_nw_weddell` (59.5–65°S, 39–55°W, Young 2024), `curl_weddell_gyre` (62–70°S, 60°W–0°, Auckland 2024, 10⁻⁷ N m⁻³), `sst_north_edge` (55–60°S, 20–35°W, after Kusahara 2025) | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `subarea/raw/era5_request.json`; GLORYS12 bathymetry and the CCAMLR shapefile for the cells | 1993-01 – 2025-12 |
+| Orcadas fill | `orcadas_fill/` | fetch stage: `raw/era5_orcadas_monthly*.nc` (`t2m`, `lsm`, 0.25°, 60–62°S, 43–46°W); `orcadas_filled`, `orcadas_filled_flag`, `era5_t2m_orcadas` added with `compute.py` | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `orcadas_fill/raw/era5_request.json`; station series from `indices/orcadas/` | 1993-01 – 2025-12 |
 
 ## Conventions
 
