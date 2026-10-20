@@ -35,11 +35,11 @@ sampling change rather than gaps. Decision: the station is the index of
 record because it is an observation independent of any reanalysis; the
 analysis applies the 90% rule from the percentage file and fills the
 seven 2020–2023 months, all in the 2017–2025 test period, with ERA5 2 m
-temperature at the station (Track B.3), after checking that ERA5 and
-the station agree in the clean years; that fill is done in the analysis
-folder, not here. Caveats: READER is revised as operators supply full
-records, so values and percentages can change between fetches, which
-`fetch.py` logs month by month; the table carries a production date but
+temperature at the station, after checking that ERA5 and the station
+agree in the clean years; that fill is done in `local/orcadas_fill/`,
+not here. Caveats: READER is revised as operators supply full records,
+so values and percentages can change between fetches, which `fetch.py`
+logs month by month; the table carries a production date but
 no version; the observing point has moved within the station over the
 century. Licence: Open Government Licence v3.0; cite Turner et al.
 (2004, *J. Climate* 17, 2890–2898) and the READER DOI on the data page.
