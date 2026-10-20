@@ -22,3 +22,4 @@ explore/**/data/
 # the request file, sha256 and fetch log in each folder are the record,
 # and anyone can re-download the same bytes with fetch.py.
 indices/zw3/raw/era5_v500_monthly.nc
+local/subarea/raw/*.nc

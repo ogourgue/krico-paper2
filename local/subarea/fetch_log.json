@@ -1,0 +1,223 @@
+{
+  "dataset": "reanalysis-era5-single-levels-monthly-means",
+  "doi": "10.24381/cds.f17050d7",
+  "downloads": [
+    {
+      "date": "2026-10-20",
+      "cdsapi_version": "?",
+      "request_file": "era5_request.json",
+      "files": [
+        {
+          "name": "era5_sector_monthly_stream-moda_stepType-avgua.nc",
+          "member": "data_stream-moda_stepType-avgua.nc",
+          "bytes": 22156391,
+          "sha256": "722d27ec39c26329453f30f94763c7e635b6732d2447ae9180e136e8cb03ebf1"
+        },
+        {
+          "name": "era5_sector_monthly_stream-moda_stepType-avgad.nc",
+          "member": "data_stream-moda_stepType-avgad.nc",
+          "bytes": 11236388,
+          "sha256": "71bdb9c98099c11967772af115eb9fb600093340b70f4918112e33668dad7c3a"
+        }
+      ],
+      "structure": {
+        "files": [
+          "era5_sector_monthly_stream-moda_stepType-avgad.nc",
+          "era5_sector_monthly_stream-moda_stepType-avgua.nc"
+        ],
+        "dims": {
+          "valid_time": 792,
+          "latitude": 51,
+          "longitude": 156
+        },
+        "first_month": "1993-01",
+        "last_month": "2025-12",
+        "n_months": 792,
+        "latitude": [
+          -90.0,
+          -40.0
+        ],
+        "longitude": [
+          -115.0,
+          40.0
+        ],
+        "variables": {
+          "u10": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "m s**-1",
+            "dtype": "float32",
+            "min": -17.456100463867188,
+            "max": 12.428207397460938,
+            "nan_fraction": 0.5
+          },
+          "v10": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "m s**-1",
+            "dtype": "float32",
+            "min": -11.108050346374512,
+            "max": 14.975264549255371,
+            "nan_fraction": 0.5
+          },
+          "t2m": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "K",
+            "dtype": "float32",
+            "min": 203.0050506591797,
+            "max": 299.90325927734375,
+            "nan_fraction": 0.5
+          },
+          "sst": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "K",
+            "dtype": "float32",
+            "min": 269.84521484375,
+            "max": 296.591552734375,
+            "nan_fraction": 0.6840749120160885
+          }
+        },
+        "warnings": [
+          "month axis differs from 1993-01..2025-12: 0 missing, 0 extra",
+          "variable metss not found; file has ['avg_iews', 'avg_inss', 'u10', 'v10', 't2m', 'sst']",
+          "variable mntss not found; file has ['avg_iews', 'avg_inss', 'u10', 'v10', 't2m', 'sst']"
+        ]
+      },
+      "changed_since_previous": null
+    },
+    {
+      "date": "2026-10-20",
+      "cdsapi_version": "?",
+      "request_file": "era5_request.json",
+      "files": [
+        {
+          "name": "era5_sector_monthly_stream-moda_stepType-avgua.nc",
+          "member": "data_stream-moda_stepType-avgua.nc",
+          "bytes": 22156391,
+          "sha256": "722d27ec39c26329453f30f94763c7e635b6732d2447ae9180e136e8cb03ebf1"
+        },
+        {
+          "name": "era5_sector_monthly_stream-moda_stepType-avgad.nc",
+          "member": "data_stream-moda_stepType-avgad.nc",
+          "bytes": 11236388,
+          "sha256": "71bdb9c98099c11967772af115eb9fb600093340b70f4918112e33668dad7c3a"
+        }
+      ],
+      "structure": {
+        "files": [
+          "era5_sector_monthly_stream-moda_stepType-avgad.nc",
+          "era5_sector_monthly_stream-moda_stepType-avgua.nc"
+        ],
+        "dims": {
+          "valid_time": 396,
+          "latitude": 51,
+          "longitude": 156
+        },
+        "first_month": "1993-01",
+        "last_month": "2025-12",
+        "n_months": 396,
+        "latitude": [
+          -90.0,
+          -40.0
+        ],
+        "longitude": [
+          -115.0,
+          40.0
+        ],
+        "variables": {
+          "u10": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "m s**-1",
+            "dtype": "float32",
+            "min": -17.456100463867188,
+            "max": 12.428207397460938,
+            "nan_fraction": 0.0
+          },
+          "v10": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "m s**-1",
+            "dtype": "float32",
+            "min": -11.108050346374512,
+            "max": 14.975264549255371,
+            "nan_fraction": 0.0
+          },
+          "t2m": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "K",
+            "dtype": "float32",
+            "min": 203.0050506591797,
+            "max": 299.90325927734375,
+            "nan_fraction": 0.0
+          },
+          "sst": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "K",
+            "dtype": "float32",
+            "min": 269.84521484375,
+            "max": 296.591552734375,
+            "nan_fraction": 0.368149824032177
+          },
+          "metss": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "N m**-2",
+            "dtype": "float32",
+            "min": -2.2240095138549805,
+            "max": 3.610499382019043,
+            "nan_fraction": 0.0,
+            "served_as": "avg_iews"
+          },
+          "mntss": {
+            "dims": [
+              "valid_time",
+              "latitude",
+              "longitude"
+            ],
+            "units": "N m**-2",
+            "dtype": "float32",
+            "min": -2.1677751541137695,
+            "max": 2.298246383666992,
+            "nan_fraction": 0.0,
+            "served_as": "avg_inss"
+          }
+        },
+        "warnings": [],
+        "metss_belt_50_60S_mean": 0.15923528373241425
+      },
+      "changed_since_previous": {}
+    }
+  ]
+}
