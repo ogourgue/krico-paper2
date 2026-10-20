@@ -20,12 +20,11 @@ wind-stress curl ∂τy/∂x − ∂τx/∂y over the Weddell Gyre box of Auckla
 et al. (2024), 62–70°S, 60°W–0°, central differences on the 1° grid, in
 units of 10⁻⁷ N m⁻³, negative = cyclonic (clockwise) in the Southern
 Hemisphere, the sense that spins the gyre up and, after 5–13 months,
-accelerates the export past the South Orkneys (Meijers et al. 2016, who
-integrate the curl over the gyre but state no corners);
+accelerates the export past the South Orkneys (Meijers et al. 2016);
 `sst_north_edge_monthly.csv`, sea surface temperature over 55–60°S,
 20–35°W, the water the ice advances into in this sector, where the
-September edge reaches 57–58°S, the regional form of the circumpolar
-45–55°S band of Kusahara and Tatebe (2025). Box means are over ocean grid points (sea
+September edge reaches 57–58°S (after the circumpolar 45–55°S band of
+Kusahara and Tatebe 2025). Box means are over ocean grid points (sea
 surface temperature defined in every month, which includes ice-covered
 ocean) weighted by cos(latitude), box edges inclusive. The spawning
 bands are the committed table `raw/spawning_cells.csv`: the release cells
@@ -73,11 +72,8 @@ forecast rates: the stresses), stamped at different hours of the same
 month, and `fetch.py` unpacks them into `raw/era5_sector_monthly_*.nc`,
 which `compute.py` opens by that pattern, floors to the month and merges. Caveats: the three wind and curl boxes take
 their corners from the papers named, the SST box is a regional
-adaptation (Kusahara's own band lies north of South Georgia, far from the
-ice here), and the eastward-stress box of the design, 60–65°S, 20–50°W,
-is not computed because Meijers et al. (2016) define no such box and the
-curl and the northwest Weddell wind carry that mechanism with published
-corners; at 1° a box is 24–550 points and the bands sit on 20–110 points,
+adaptation of Kusahara and Tatebe's circumpolar band; at 1° a box is
+24–550 points and the bands sit on 20–110 points,
 so neighbouring series are not independent; a release cell near the coast can have a land point as its
 nearest grid point and is then moved to the nearest ocean point (counts
 and the largest displacement are in `PROVENANCE.md`); the cell table is

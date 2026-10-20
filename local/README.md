@@ -24,13 +24,10 @@ variable group, each with
 No shared code across subfolders and no imports from elsewhere in the
 repository, so each folder runs on its own. Window files and the joined
 year × subarea tables live with the analysis that uses them, not here.
-Pruning before release: folders never run against the outcomes are
-deleted; folders behind a negative result in the text stay.
 
 ## Groups
 
-Build order: subarea, orcadas_fill, ice_timing, weddell_export. Rows are
-added as folders are built; each folder fetches its own inputs.
+Each folder fetches its own inputs.
 
 | Group | Folder | Variables | Source | Period |
 |---|---|---|---|---|
@@ -56,9 +53,9 @@ added as folders are built; each folder fetches its own inputs.
   in m s⁻¹ positive eastward (u) and northward (v), stress in N m⁻² as
   the stress exerted on the surface (positive eastward/northward push),
   wind-stress curl in 10⁻⁷ N m⁻³ with negative = cyclonic in the Southern
-  Hemisphere, NSIDC days as day of year. A "northerly wind" in the design
-  is therefore a negative v; the expected sign is written down in the
-  analysis folder, not flipped here.
+  Hemisphere, NSIDC days as day of year. A northerly wind is therefore a
+  negative v; expected signs are written down in the analysis folder, not
+  flipped here.
 - Gridded ERA5 fields are not committed (versioned, DOI'd, re-downloadable
   source); the request file, sha256 and fetch log are the record. Small
   reduced tables and the station-scale series are committed.

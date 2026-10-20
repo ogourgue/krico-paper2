@@ -36,8 +36,7 @@ and `compute_log.json`, and so are the seven replaced values next to the
 weak station values they replace; the fill is a model value and is
 flagged as such, so any result that hinges on one of the seven months
 must be checked against the flag; months of 2020–2025 below the 90% rule
-outside the seven are listed by `compute.py` but left as published,
-because the design uses May–July only; the station file in
+outside the seven are listed by `compute.py` but left as published; the station file in
 `../../indices/orcadas/` is revised by READER as operators supply full
 records, so a re-fetch there changes the inputs here and `compute.py
 --check` will say so. Licence: CC-BY 4.0
