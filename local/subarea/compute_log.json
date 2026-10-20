@@ -1,0 +1,172 @@
+{
+  "cells": {
+    "bathymetry_file": "/Users/ogourgue/Local/KRICO/Pre/GLORYS12/glorys12_bathymetry.nc",
+    "bathymetry_sha256": "75fd8a5eef6a6189583ff38040afd25412d285cb7eb2ac3fec448488597b3966",
+    "shapefile_sha256": "e468d4952d0f7788a82153fe8f8015e9ecc35f3fea0b07ccd945ae3f23925efb",
+    "grid": [
+      968,
+      1858
+    ],
+    "band_cells_total": 48841,
+    "cells_in_release_areas": 35303,
+    "cells_in_two_areas": 17,
+    "particles_per_day": 546199,
+    "particles_per_day_after_filter": 545807.0,
+    "per_area": {
+      "48.1": {
+        "cells": 2681,
+        "particles": 49193
+      },
+      "48.2": {
+        "cells": 3903,
+        "particles": 81670
+      },
+      "48.3": {
+        "cells": 2900,
+        "particles": 93606
+      },
+      "48.4": {
+        "cells": 1459,
+        "particles": 34586
+      },
+      "48.5": {
+        "cells": 11674,
+        "particles": 99357
+      },
+      "48.6": {
+        "cells": 9414,
+        "particles": 155651
+      },
+      "88.3": {
+        "cells": 3272,
+        "particles": 32136
+      }
+    }
+  },
+  "date": "2026-10-20",
+  "reduction": {
+    "era5_files": {
+      "era5_sector_monthly_stream-moda_stepType-avgad.nc": "71bdb9c98099c11967772af115eb9fb600093340b70f4918112e33668dad7c3a",
+      "era5_sector_monthly_stream-moda_stepType-avgua.nc": "722d27ec39c26329453f30f94763c7e635b6732d2447ae9180e136e8cb03ebf1"
+    },
+    "months": 396,
+    "first": "1993-01",
+    "last": "2025-12",
+    "ocean_points": 5027,
+    "bands": {
+      "883": {
+        "cells": 3272,
+        "weight_total": 32136.0,
+        "grid_points": 74,
+        "redirected_from_land": 7,
+        "max_distance_km": 58.50587444172827
+      },
+      "481": {
+        "cells": 2681,
+        "weight_total": 49193.0,
+        "grid_points": 64,
+        "redirected_from_land": 86,
+        "max_distance_km": 67.34767935939169
+      },
+      "482": {
+        "cells": 3903,
+        "weight_total": 81670.0,
+        "grid_points": 77,
+        "redirected_from_land": 0,
+        "max_distance_km": 61.681299930377925
+      },
+      "484": {
+        "cells": 1459,
+        "weight_total": 34586.0,
+        "grid_points": 33,
+        "redirected_from_land": 0,
+        "max_distance_km": 61.69708527383894
+      }
+    },
+    "boxes": {
+      "south_orkney": {
+        "points": 24,
+        "box": [
+          -62.5,
+          -60.0,
+          -48.0,
+          -41.0
+        ]
+      },
+      "nw_weddell": {
+        "points": 102,
+        "box": [
+          -65.0,
+          -59.5,
+          -55.0,
+          -39.0
+        ]
+      },
+      "weddell_gyre": {
+        "points": 542,
+        "box": [
+          -70.0,
+          -62.0,
+          -60.0,
+          0.0
+        ],
+        "mean_curl_1e-7_N_m-3": -1.2867041128408958
+      },
+      "north_edge": {
+        "points": 96,
+        "box": [
+          -60.0,
+          -55.0,
+          -35.0,
+          -20.0
+        ],
+        "max_fraction_at_freezing": 0.7395833333333334,
+        "worst_month": "2014-09",
+        "max_fraction_at_freezing_mar_jun": 0.3645833333333333,
+        "worst_month_mar_jun": "2016-06"
+      }
+    }
+  },
+  "boxes": {
+    "south_orkney": [
+      -62.5,
+      -60.0,
+      -48.0,
+      -41.0
+    ],
+    "nw_weddell": [
+      -65.0,
+      -59.5,
+      -55.0,
+      -39.0
+    ],
+    "weddell_gyre": [
+      -70.0,
+      -62.0,
+      -60.0,
+      0.0
+    ],
+    "north_edge": [
+      -60.0,
+      -55.0,
+      -35.0,
+      -20.0
+    ]
+  },
+  "outputs": [
+    "v10_band_883",
+    "t2m_band_883",
+    "v10_band_481",
+    "t2m_band_481",
+    "v10_band_482",
+    "t2m_band_482",
+    "v10_band_484",
+    "t2m_band_484",
+    "u10_south_orkney",
+    "v10_south_orkney",
+    "u10_nw_weddell",
+    "v10_nw_weddell",
+    "curl_weddell_gyre",
+    "sst_north_edge"
+  ]
+}

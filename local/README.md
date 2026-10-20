@@ -34,7 +34,7 @@ added as folders are built; each folder fetches its own inputs.
 
 | Group | Folder | Variables | Source | Period |
 |---|---|---|---|---|
-| Subarea and box series from ERA5 | `subarea/` | fetch stage: `raw/era5_sector_monthly*.nc` (`u10`, `v10`, `t2m`, `sst`, `metss`, `mntss`, monthly, 1° × 1°, 115°W–40°E, 40°S–pole); monthly files added with `compute.py` | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `subarea/raw/era5_request.json` | 1993-01 – 2025-12 |
+| Subarea and box series from ERA5 | `subarea/` | `v10_band_<sub>`, `t2m_band_<sub>` (sub = 883, 481, 482, 484; weighted over the release cells of `raw/spawning_cells.csv`), `u10_south_orkney`, `v10_south_orkney` (60–62.5°S, 41–48°W, Young 2024), `u10_nw_weddell`, `v10_nw_weddell` (59.5–65°S, 39–55°W, Young 2024), `curl_weddell_gyre` (62–70°S, 60°W–0°, Auckland 2024, 10⁻⁷ N m⁻³), `sst_north_edge` (55–60°S, 20–35°W, after Kusahara 2025) | ERA5 monthly averaged data on single levels, Copernicus Climate Data Store, doi:10.24381/cds.f17050d7, request in `subarea/raw/era5_request.json`; GLORYS12 bathymetry and the CCAMLR shapefile for the cells | 1993-01 – 2025-12 |
 
 ## Conventions
 
@@ -52,7 +52,10 @@ added as folders are built; each folder fetches its own inputs.
 - Values keep the source's units and sign: ERA5 temperatures in K, wind
   in m s⁻¹ positive eastward (u) and northward (v), stress in N m⁻² as
   the stress exerted on the surface (positive eastward/northward push),
-  NSIDC days as day of year.
+  wind-stress curl in 10⁻⁷ N m⁻³ with negative = cyclonic in the Southern
+  Hemisphere, NSIDC days as day of year. A "northerly wind" in the design
+  is therefore a negative v; the expected sign is written down in the
+  analysis folder, not flipped here.
 - Gridded ERA5 fields are not committed (versioned, DOI'd, re-downloadable
   source); the request file, sha256 and fetch log are the record. Small
   reduced tables and the station-scale series are committed.
