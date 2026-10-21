@@ -29,6 +29,7 @@ Same scheme as krico-paper1, plus one folder for work in progress:
 |---|---|---|
 | `F1_domain_map` | Figure 1 — map: (a) Paper 1's Fig. 1; (b) index regions | not started, built last |
 | `F2_domain_timeseries` | Figure 2 — domain time series, success and composition, NSIDC ice | done |
+| `F3_subarea_record` | Figure 3 — per-subarea record, four recruiting subareas, success and composition, NSIDC ice | done |
 
 `ccamlr-data/` holds the CCAMLR statistical-area shapefile (EPSG:4326),
 copied from krico-paper1 so this repo is self-contained.
