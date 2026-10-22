@@ -30,16 +30,20 @@ Same scheme as krico-paper1, plus one folder for work in progress:
 | `F1_domain_map` | Figure 1 — map: (a) Paper 1's Fig. 1; (b) index regions | not started, built last |
 | `F2_domain_timeseries` | Figure 2 — domain time series, success and composition, NSIDC ice | done |
 | `F3_subarea_record` | Figure 3 — per-subarea record, four recruiting subareas, success and composition, NSIDC ice | done |
+| `FS1_ice_product` | Figure S1 — the classification under three ice readings (GLORYS12, GLORYS12 on the 25 km grid, NSIDC): domain success, product and resolution differences per outcome | done |
+| `FS2_ice_product_subarea` | Figure S2 — the product difference per outcome in each of the eight release subareas | done |
 
 `ccamlr-data/` holds the CCAMLR statistical-area shapefile (EPSG:4326),
 copied from krico-paper1 so this repo is self-contained.
 
 ## Reproducing
 
-Each `F*` folder reads committed `data/*.nc` with `plot*.py` scripts and
-needs no HPC access; the `aggregate*.py` scripts that produce those files
-run on the laptop against `$KRICO_POST/recruitment/data_nsidc/`, the cohort
-files rsynced from ECMWF. Per-folder READMEs give the details.
+Each `F*` and `FS*` folder reads its committed `data/*.nc` with `plot.py`
+and needs nothing else; the `aggregate.py` in the same folder produces those
+files from the cohort files of the recruitment classification
+(`$KRICO_POST/recruitment/`, the output of krico-post-production), and
+records the sha256 of every file it read. Per-folder READMEs give the
+details.
 
 ## License
 

@@ -15,9 +15,6 @@ __pycache__/
 **/*.out
 ecsbatch.log.*
 
-# Exploratory work that has not earned an F/FS/S prefix (see README).
-explore/**/data/
-
 # ERA5 fields downloaded from the Climate Data Store are not committed:
 # the request file, sha256 and fetch log in each folder are the record,
 # and anyone can re-download the same bytes with fetch.py.
